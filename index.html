@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Owns a Digital Persona?</title>
+<meta name="description" content="A research study on AI virtual influencers and intellectual property law: copyright, trademark, personality rights, advertising rules and contracts. MGT402M26 group project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: full-bleed gradient hero with floating rights-tokens, then a legal-brief grid (sticky § rail left, argument right), broken by dark case-file chapters and a peach activity room. Left-aligned throughout. */
+  --ink:#24141f;
+  --paper:#fdf8f5;
+  --coral:#ee5236;
+  --rose:#dc4570;
+  --peach:#f5b38c;
+  --lime:#d8f06c;
+  --ink-soft:#5d4853;
+  --ink-faint:#8a7480;
+  --blush:#f7ece8;
+  --line:#ecdcd5;
+  --display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"Newsreader",Georgia,"Times New Roman",serif;
+  --gut:clamp(16px,4vw,56px);
+  --max:1240px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg,canvas{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:8px}
+p{margin:0}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:600}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+/* progress + pill nav */
+.progress{position:fixed;inset:0 0 auto 0;height:3px;z-index:60;background:transparent}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--coral),var(--peach))}
+.pill{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:2px;padding:6px;background:var(--coral);border-radius:999px;box-shadow:0 18px 40px -14px rgba(196,48,30,.65),0 2px 0 rgba(255,255,255,.2) inset;max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none}
+.pill::-webkit-scrollbar{display:none}
+.pill a{font-family:var(--display);font-weight:600;font-size:15px;color:#fff;text-decoration:none;padding:10px 16px;border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}
+.pill a:hover{background:rgba(255,255,255,.16)}
+.pill a.on{background:#fff;color:var(--coral)}
+.pill .home{display:grid;place-items:center;width:44px;height:44px;padding:0;background:rgba(255,255,255,.18)}
+.pill .home svg{width:20px;height:20px}
+
+/* buttons + chips */
+.btn{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;height:50px;padding:0 24px;border-radius:999px;font-family:var(--display);font-weight:600;font-size:16px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .15s,background .2s,color .2s}
+.btn:active{transform:translateY(1px)}
+.btn-white{background:#fff;color:var(--coral)}
+.btn-white:hover{background:var(--ink);color:#fff}
+.btn-line{border-color:rgba(255,255,255,.7);color:#fff;background:transparent}
+.btn-line:hover{background:rgba(255,255,255,.14)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:var(--coral)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:13px;font-weight:600;line-height:1;padding:7px 11px;border-radius:999px;white-space:nowrap;background:var(--blush);color:var(--ink)}
+.chip.yes{background:var(--lime);color:#2a3300}
+.chip.maybe{background:#fde3cf;color:#7a3511}
+.chip.no{background:#fbd6df;color:#8a1236}
+.chip.ink{background:var(--ink);color:#fff}
+
+/* hero */
+.hero{position:relative;overflow:hidden;color:#fff;min-height:700px;display:flex;flex-direction:column;
+  background:
+    radial-gradient(70% 90% at 0% 0%,#d93f73 0%,rgba(217,63,115,0) 60%),
+    radial-gradient(55% 70% at 38% 72%,#e5373b 0%,rgba(229,55,59,0) 70%),
+    radial-gradient(60% 80% at 100% 100%,#f9d4b4 0%,rgba(249,212,180,0) 70%),
+    linear-gradient(105deg,#df4a6e 0%,#ec4f3b 38%,#f2906b 70%,#f6c09b 100%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .grain{position:absolute;inset:0;pointer-events:none;opacity:.18;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.topbar{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:28px var(--gut) 0;max-width:calc(var(--max) + 2*var(--gut) + 160px);margin:0 auto;width:100%}
+.wordmark{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:-.04em;text-decoration:none;line-height:1}
+.wordmark i{font-family:var(--body);font-weight:400;font-style:italic;letter-spacing:0;margin:0 .08em}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.topbar-right .course{font-family:var(--display);font-size:14px;font-weight:500;opacity:.9;margin-right:8px}
+.topbar .btn{height:44px;padding:0 20px;font-size:15px}
+.hero-body{position:relative;z-index:2;margin-top:auto;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:end;gap:40px;padding:120px var(--gut) 0;max-width:calc(var(--max) + 2*var(--gut) + 160px);margin-inline:auto;width:100%}
+.hero h1{font-size:clamp(54px,8.2vw,128px);line-height:.9;letter-spacing:-.055em;font-weight:600;max-width:10.5ch;text-shadow:0 2px 30px rgba(160,20,40,.18)}
+.hero-aside{display:grid;gap:26px;padding-bottom:10px;max-width:420px;justify-self:end}
+.hero-aside p{font-family:var(--display);font-size:21px;line-height:1.35;font-weight:500;letter-spacing:-.01em}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-foot{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:10px 34px;padding:40px var(--gut) 96px;max-width:calc(var(--max) + 2*var(--gut) + 160px);margin-inline:auto;width:100%;font-family:var(--display);font-size:15px;font-weight:500}
+.hero-foot b{font-weight:700;font-size:17px;margin-right:6px}
+.hero-foot span{opacity:.95}
+
+/* instruments strip */
+.strip{border-bottom:1px solid var(--line);background:var(--paper)}
+.strip .wrap{display:flex;align-items:center;gap:28px;padding-block:22px;overflow-x:auto;scrollbar-width:thin}
+.strip h2{font-size:14px;font-weight:600;color:var(--ink-faint);flex:none;letter-spacing:0}
+.strip ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;flex:none}
+.strip li{font-family:var(--display);font-weight:600;font-size:16px;color:var(--ink-soft);white-space:nowrap;display:flex;align-items:center;gap:9px}
+.strip li svg{width:18px;height:18px;color:var(--coral);flex:none}
+
+/* thesis + bento */
+.thesis{padding-block:clamp(72px,9vw,120px) 40px}
+.thesis-text{font-family:var(--display);font-size:clamp(32px,4.3vw,58px);line-height:1.08;letter-spacing:-.035em;font-weight:600;max-width:23ch}
+.thesis-text .soft{color:#b9a3ad}
+.ichip{display:inline-grid;place-items:center;width:1.05em;height:1.05em;border-radius:50%;vertical-align:-.12em;font-size:.82em;color:#fff;margin:0 .06em}
+.ichip.c1{background:radial-gradient(circle at 35% 30%,#ffb79e,var(--coral) 60%,#b8283a)}
+.ichip.c2{background:radial-gradient(circle at 35% 30%,#eef9a8,var(--lime) 55%,#9db52a);color:var(--ink)}
+.ichip.c3{background:radial-gradient(circle at 35% 30%,#ffc2d3,var(--rose) 60%,#93204a)}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(210px,auto);gap:16px;margin-top:56px}
+.tile{border-radius:26px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;background:var(--blush);font-family:var(--display)}
+.tile .big{font-size:clamp(40px,4.4vw,60px);font-weight:600;letter-spacing:-.045em;line-height:1}
+.tile p{font-size:16px;line-height:1.4;color:var(--ink-soft);max-width:32ch}
+.tile .src{font-size:13px;color:var(--ink-faint)}
+.tile .src a{color:inherit}
+.tile.ava{grid-row:span 2;color:#fff;position:relative;overflow:hidden;background:
+  radial-gradient(80% 60% at 20% 0%,#f08aa6 0%,rgba(240,138,166,0) 60%),
+  linear-gradient(160deg,#e2507a 0%,#ef5a3f 55%,#f5ae86 100%)}
+.tile.ava .tag{align-self:flex-start;font-size:13px;font-weight:600;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.2)}
+.ava-card{background:#fff;color:var(--ink);border-radius:20px;padding:18px;display:grid;gap:14px;box-shadow:0 24px 40px -24px rgba(120,20,30,.6)}
+.ava-top{display:flex;align-items:center;gap:14px}
+.orb{width:64px;height:64px;border-radius:50%;flex:none;background:
+  radial-gradient(circle at 34% 30%,#fff6f0 0 9%,rgba(255,246,240,0) 22%),
+  radial-gradient(circle at 60% 70%,#9d2445 0%,rgba(157,36,69,0) 55%),
+  radial-gradient(circle at 40% 40%,#f9c0a3 0%,#ee5236 55%,#a8233f 100%);
+  box-shadow:inset -6px -8px 16px rgba(110,10,40,.35)}
+.ava-top b{display:block;font-size:19px;letter-spacing:-.02em}
+.ava-top span{font-size:14px;color:var(--ink-faint)}
+.ava-label{font-size:13px;font-weight:600;background:var(--lime);color:#2a3300;border-radius:10px;padding:8px 10px}
+.ava-hands{display:grid;gap:8px;margin:0;font-size:14px}
+.ava-hands div{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:8px}
+.ava-hands dt{color:var(--ink-faint)}
+.ava-hands dd{margin:0;font-weight:600;text-align:right}
+.tile.wide{grid-column:span 2}
+.tile.limeT{background:var(--lime)}
+.tile.limeT p,.tile.limeT .src{color:#3d4500}
+.tile.inkT{background:var(--ink);color:#fff}
+.tile.inkT p{color:#d9c6cf}
+.tile.inkT .src{color:#a8929d}
+
+/* contents */
+.contents{padding-block:24px clamp(72px,9vw,120px)}
+.contents h2{font-size:28px;letter-spacing:-.03em;margin-bottom:24px}
+.toc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.toc section{border-top:2px solid var(--ink);padding-top:14px}
+.toc h3{font-size:15px;font-weight:600;color:var(--ink-faint);margin-bottom:10px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.toc a{display:flex;gap:10px;text-decoration:none;font-family:var(--display);font-size:17px;font-weight:500;padding:5px 0;line-height:1.3}
+.toc a:hover{color:var(--coral)}
+.toc a span{color:var(--coral);font-weight:600;min-width:2.6ch}
+
+/* chapters */
+.chapter{padding-block:clamp(72px,9vw,128px);border-top:1px solid var(--line)}
+.ch{display:grid;grid-template-columns:200px minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+.ch-rail{position:sticky;top:28px;align-self:start;display:grid;gap:6px;font-family:var(--display)}
+.ch-num{font-size:56px;font-weight:300;letter-spacing:-.05em;line-height:1;color:var(--coral)}
+.ch-part{font-size:14px;font-weight:600;color:var(--ink-faint)}
+.ch-main{min-width:0;display:grid;gap:48px}
+.ch-main>header{display:grid;gap:22px}
+.ch-main h2{font-size:clamp(38px,4.6vw,64px);line-height:1;letter-spacing:-.045em}
+.lead{font-size:clamp(21px,2vw,25px);line-height:1.45;color:var(--ink-soft);max-width:44ch}
+.prose{display:grid;gap:18px;max-width:64ch}
+.prose a,.cite{color:var(--ink);text-decoration-color:rgba(238,82,54,.55);text-decoration-thickness:1.5px;text-underline-offset:3px}
+.prose a:hover,.cite:hover{color:var(--coral)}
+.block{display:grid;gap:22px}
+.block>h3{font-size:clamp(24px,2.3vw,30px);letter-spacing:-.03em;line-height:1.15}
+.block>.note{font-size:16px;color:var(--ink-faint);max-width:70ch}
+.sub{font-family:var(--display);font-size:15px;color:var(--ink-faint);font-weight:500}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border-radius:20px;background:#fff;border:1px solid var(--line)}
+.tbl{width:100%;border-collapse:collapse;font-family:var(--display);font-size:15.5px;line-height:1.45;min-width:640px}
+.tbl th{text-align:left;font-weight:600;font-size:13.5px;color:var(--ink-faint);padding:16px 18px 12px;border-bottom:1px solid var(--line);vertical-align:bottom}
+.tbl td{padding:15px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child{font-weight:600}
+.tbl td a{color:inherit;text-decoration-color:rgba(238,82,54,.5);text-underline-offset:2px}
+.tbl em{font-family:var(--body);font-size:1.06em}
+.tbl.plain{min-width:560px}
+
+/* steps (chronological) */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.step{border-radius:22px;padding:24px;background:var(--blush);display:grid;gap:12px;align-content:start}
+.step .yr{font-family:var(--display);font-weight:600;font-size:15px;color:var(--coral)}
+.step h4{font-size:21px;letter-spacing:-.02em;line-height:1.2}
+.step p{font-size:17px;line-height:1.5;color:var(--ink-soft)}
+
+/* callouts */
+.verdict{border-radius:28px;padding:clamp(26px,4vw,44px);background:var(--ink);color:#fbeff1;display:grid;gap:14px;position:relative;overflow:hidden}
+.verdict::after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(238,82,54,.55),rgba(238,82,54,0) 70%);pointer-events:none}
+.verdict h3{font-size:15px;font-weight:600;color:var(--peach);position:relative;z-index:1}
+.verdict p{font-size:clamp(21px,2.1vw,26px);line-height:1.42;max-width:52ch;position:relative;z-index:1}
+.aside-note{border-left:3px solid var(--coral);padding:4px 0 4px 20px;display:grid;gap:8px;max-width:70ch}
+.aside-note h4{font-size:16px}
+.aside-note p{font-size:17px;color:var(--ink-soft)}
+
+/* grids */
+.cols-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.cols-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{border-radius:22px;padding:24px;background:#fff;border:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.card h4{font-size:20px;letter-spacing:-.02em;line-height:1.2}
+.card p,.card li{font-size:17px;line-height:1.5;color:var(--ink-soft)}
+.card ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.card .k{font-family:var(--display);font-size:13px;font-weight:600;color:var(--coral)}
+.bullets{margin:0;padding-left:20px;display:grid;gap:10px;max-width:66ch}
+.bullets li{padding-left:4px}
+.bullets li::marker{color:var(--coral)}
+
+/* chart */
+.chart{border-radius:24px;background:#fff;border:1px solid var(--line);padding:clamp(20px,3vw,32px);display:grid;gap:18px;font-family:var(--display)}
+.chart figcaption{display:grid;gap:4px}
+.chart figcaption b{font-size:19px;letter-spacing:-.02em}
+.chart figcaption span{font-size:14px;color:var(--ink-faint)}
+.bars{display:grid;gap:12px}
+.bar-row{display:grid;grid-template-columns:200px minmax(0,1fr) 150px;align-items:center;gap:16px;font-size:15px}
+.bar-row .who a{color:inherit;text-decoration:none}
+.bar-row .who a:hover{color:var(--coral)}
+.bar-track{position:relative;height:34px;border-radius:10px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(33.333% - 1px),var(--line) calc(33.333% - 1px),var(--line) 33.333%)}
+.bar{position:absolute;inset:0 auto 0 0;border-radius:10px;background:linear-gradient(90deg,var(--rose),var(--coral) 70%,#f27e5a);display:flex;align-items:center;justify-content:flex-end;padding-right:12px;color:#fff;font-weight:600;font-size:15px}
+.bar-row .fc{font-size:13.5px;color:var(--ink-faint);line-height:1.3}
+.axis{display:grid;grid-template-columns:200px minmax(0,1fr) 150px;gap:16px;font-size:13px;color:var(--ink-faint)}
+.axis div{display:flex;justify-content:space-between}
+
+/* roster */
+.roster{display:grid;gap:0;border-top:2px solid var(--ink)}
+.persona{display:grid;grid-template-columns:52px 230px minmax(0,1fr);grid-template-areas:"m n p" "m meta p";column-gap:20px;row-gap:4px;align-items:start;padding:18px 0;border-bottom:1px solid var(--line);font-family:var(--display)}
+.persona .mono{grid-area:m}
+.persona h4{grid-area:n}
+.persona .meta{grid-area:meta}
+.persona p{grid-area:p;font-size:16px!important}
+.score h4{font-size:15px;color:var(--peach)}
+.mono{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:19px;letter-spacing:-.03em}
+.persona h4{font-size:19px;letter-spacing:-.02em}
+.persona .meta{font-size:13.5px;color:var(--ink-faint);line-height:1.35}
+.persona p{font-size:14.5px;line-height:1.45;color:var(--ink-soft)}
+.persona a{color:inherit}
+
+/* findings */
+.findings{display:grid;gap:0;border-top:1px solid var(--line)}
+.finding{display:grid;grid-template-columns:180px minmax(0,1fr);gap:24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.finding .fig{font-family:var(--display);font-size:36px;font-weight:600;letter-spacing:-.04em;color:var(--coral);line-height:1}
+.finding p{font-size:18px;max-width:62ch}
+
+/* explorer */
+.explorer{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.ring{position:relative;aspect-ratio:1;border-radius:32px;background:radial-gradient(circle at 50% 50%,#fde5da 0%,#fbf1ec 46%,var(--paper) 70%);border:1px solid var(--line)}
+.ring::before{content:"";position:absolute;inset:16%;border-radius:50%;border:1.5px dashed #e7b9aa}
+.ring .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:28%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--display);color:#fff;background:radial-gradient(circle at 34% 30%,#fff3ec 0 6%,rgba(255,243,236,0) 20%),radial-gradient(circle at 40% 40%,#f7b598 0%,#ee5236 55%,#a8233f 100%);box-shadow:0 20px 40px -18px rgba(170,30,40,.7)}
+.ring .core b{display:block;font-size:clamp(20px,2.4vw,30px);letter-spacing:-.04em;line-height:1}
+.ring .core span{font-size:12px;font-weight:500;opacity:.9}
+.node{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--display);font-weight:600;font-size:14px;line-height:1.2;padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);color:var(--ink);cursor:pointer;max-width:150px;text-align:center;transition:background .2s,color .2s,border-color .2s}
+.node:hover{border-color:var(--coral)}
+.node[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.detail{border-radius:32px;background:var(--ink);color:#fbeff1;padding:clamp(24px,3vw,36px);display:grid;gap:22px;align-content:start}
+.detail .d-k{font-family:var(--display);font-size:14px;font-weight:600;color:var(--peach)}
+.detail h4{font-size:clamp(26px,2.6vw,34px);letter-spacing:-.035em;line-height:1.05}
+.detail dl{margin:0;display:grid;gap:16px}
+.detail dt{font-family:var(--display);font-size:13.5px;font-weight:600;color:#bfa6b1;margin-bottom:4px}
+.detail dd{margin:0;font-size:18px;line-height:1.5}
+.detail .risk{border-radius:16px;background:rgba(255,255,255,.07);padding:14px 16px;font-size:16.5px}
+
+/* questions trio */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-radius:24px;overflow:hidden;border:1px solid var(--line)}
+.trio>div{padding:26px;background:#fff;display:grid;gap:10px;align-content:start}
+.trio>div+div{border-left:1px solid var(--line)}
+.trio h4{font-size:21px;letter-spacing:-.025em}
+.trio p{font-size:17px;color:var(--ink-soft);line-height:1.5}
+
+/* responsive */
+@media (max-width:1080px){
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tile.ava{grid-row:span 1;grid-column:span 2}
+  .toc{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .hero-body{grid-template-columns:1fr;padding-top:200px}
+  .hero-aside{justify-self:start}
+  .topbar-right .course{display:none}
+  .ch{grid-template-columns:1fr}
+  .ch-rail{position:static;display:flex;align-items:baseline;gap:14px}
+  .ch-num{font-size:40px}
+  .explorer{grid-template-columns:1fr}
+  .steps,.cols-3,.trio{grid-template-columns:1fr}
+  .trio>div+div{border-left:0;border-top:1px solid var(--line)}
+  .bar-row,.axis{grid-template-columns:120px minmax(0,1fr)}
+  .bar-row .fc,.axis>span{display:none}
+}
+@media (max-width:620px){
+  body{font-size:18px}
+  .bento{grid-template-columns:1fr}
+  .tile.ava,.tile.wide{grid-column:span 1}
+  .cols-2,.toc{grid-template-columns:1fr}
+  .persona{grid-template-columns:52px minmax(0,1fr);grid-template-areas:"m n" "m meta" "p p"}
+  .persona p{margin-top:8px}
+  .finding{grid-template-columns:1fr;gap:8px}
+  .topbar .btn-line{display:none}
+  .ring .node{font-size:12px;padding:7px 9px;max-width:110px}
+  .pill a{padding:9px 12px;font-size:14px}
+}
+/* kinds grid */
+.kinds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--ink)}
+.kinds>div{padding:16px 18px 4px 0;display:grid;gap:6px;align-content:start}
+.kinds>div+div{padding-left:18px;border-left:1px solid var(--line)}
+.kinds b{font-family:var(--display);font-size:17px;letter-spacing:-.015em}
+.kinds span{font-size:16px;color:var(--ink-soft);line-height:1.45}
+
+/* vertical timeline (dated sequence) */
+.vtl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.vtl li{display:grid;grid-template-columns:150px 22px minmax(0,1fr);gap:16px;position:relative}
+.vtl .when{font-family:var(--display);font-weight:600;font-size:15px;color:var(--coral);padding-top:3px;text-align:right}
+.vtl .dot{position:relative}
+.vtl .dot::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--line)}
+.vtl li:first-child .dot::before{top:10px}
+.vtl li:last-child .dot::before{bottom:auto;height:10px}
+.vtl .dot::after{content:"";position:absolute;left:4px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--coral)}
+.vtl li.pending .dot::after{border-style:dashed;border-color:var(--ink-faint)}
+.vtl .what{padding-bottom:26px;display:grid;gap:6px;max-width:64ch}
+.vtl .what b{font-family:var(--display);font-size:19px;letter-spacing:-.02em;line-height:1.25}
+.vtl .what p{font-size:17px;color:var(--ink-soft);line-height:1.55}
+
+/* tabs */
+.tabs{display:grid;gap:16px}
+.tablist{display:flex;flex-wrap:wrap;gap:8px}
+.tablist button{font-family:var(--display);font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.tablist button:hover{border-color:var(--coral)}
+.tablist button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabpanel{border-radius:26px;background:var(--blush);padding:clamp(22px,3vw,34px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px}
+.tabpanel[hidden]{display:none}
+.tabpanel h4{font-size:clamp(24px,2.4vw,30px);letter-spacing:-.03em;line-height:1.1;margin-bottom:12px}
+.tabpanel p{font-size:18px;color:var(--ink-soft)}
+.tabpanel .auth{font-family:var(--display);font-size:15px;line-height:1.5;display:grid;gap:10px;align-content:start;border-left:1px solid #e3cfc8;padding-left:24px}
+.tabpanel .auth b{font-size:13px;color:var(--ink-faint);font-weight:600}
+.tabpanel .auth a{color:var(--ink);text-underline-offset:2px;text-decoration-color:rgba(238,82,54,.5)}
+
+/* certificate */
+.cert{border-radius:6px 26px 26px 26px;background:#fff;border:1px solid var(--line);padding:26px;display:grid;gap:16px;font-family:var(--display);position:relative;overflow:hidden}
+.cert::before{content:"®";position:absolute;right:-18px;bottom:-60px;font-size:220px;font-weight:700;color:#fbe6df;line-height:1;pointer-events:none}
+.cert>*{position:relative}
+.cert .seal{font-size:13px;font-weight:600;color:var(--coral)}
+.cert h4{font-size:44px;letter-spacing:-.05em;line-height:1}
+.cert dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:15px}
+.cert dt{color:var(--ink-faint)}
+.cert dd{margin:0;font-weight:600}
+.cert p{font-family:var(--body);font-size:16.5px;color:var(--ink-soft)}
+
+/* case-law scroller */
+.scroller-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.scroller-btns{display:flex;gap:8px}
+.scroller-btns button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+.scroller-btns button:hover{border-color:var(--coral);color:var(--coral)}
+.scroller-btns svg{width:18px;height:18px}
+.cases-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;scrollbar-width:thin}
+.case{flex:0 0 300px;min-width:0;scroll-snap-align:start;border-radius:24px;padding:22px;background:#fff;border:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.case.ai{background:linear-gradient(170deg,#fff 0%,#fff 55%,#fde4d8 100%);border-color:#f3c6b4}
+.case .y{font-family:var(--display);font-size:40px;font-weight:600;letter-spacing:-.05em;line-height:1;color:var(--ink)}
+.case.ai .y{color:var(--coral)}
+.case h4{font-family:var(--body);font-style:italic;font-weight:500;font-size:19px;line-height:1.3}
+.case .court{font-family:var(--display);font-size:13.5px;font-weight:600;color:var(--ink-faint)}
+.case p{font-size:16px;line-height:1.5;color:var(--ink-soft)}
+.case a{color:inherit;font-size:14px;font-family:var(--display)}
+
+/* liability meter */
+.meter-list{display:grid;gap:0;border-top:1px solid var(--line)}
+.meter-row{display:grid;grid-template-columns:190px 150px minmax(0,1fr);gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.meter-row b{font-family:var(--display);font-size:18px;letter-spacing:-.015em}
+.meter{display:flex;gap:4px}
+.meter i{flex:1;height:10px;border-radius:4px;background:var(--line)}
+.meter i.f{background:var(--coral)}
+.meter-row small{display:block;font-family:var(--display);font-size:13px;color:var(--ink-faint);margin-top:6px;font-weight:600}
+.meter-row p{font-size:17px;color:var(--ink-soft)}
+
+/* contract hub */
+.hub{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;position:relative}
+.hub .ag{border-radius:20px;background:#fff;border:1px solid var(--line);padding:18px;display:grid;gap:8px;align-content:start;position:relative}
+.hub .ag .with{font-family:var(--display);font-size:13px;font-weight:600;color:var(--coral)}
+.hub .ag h4{font-size:18px;letter-spacing:-.02em;line-height:1.2}
+.hub .ag p{font-size:15.5px;line-height:1.45;color:var(--ink-soft)}
+.hub .center{grid-column:1/-1;border-radius:999px;background:var(--ink);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:center;gap:14px;font-family:var(--display);font-weight:600;font-size:18px;text-align:center;position:relative}
+.hub .center .orb{width:38px;height:38px}
+.hub .row1 .ag::after,.hub .row3 .ag::before{content:"";position:absolute;left:50%;width:2px;height:14px;background:#e3c3b8}
+.hub .row1 .ag::after{bottom:-15px}
+.hub .row3 .ag::before{top:-15px}
+.hub .row1,.hub .row3{display:contents}
+
+/* clauses */
+.clauses{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.clauses li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}
+.clauses svg{width:22px;height:22px;color:var(--coral);margin-top:3px}
+.clauses b{font-family:var(--display);font-size:17px;letter-spacing:-.01em;display:block;margin-bottom:3px}
+.clauses span{font-size:16.5px;color:var(--ink-soft);line-height:1.5}
+
+@media (max-width:900px){
+  .kinds{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kinds>div:nth-child(3){padding-left:0;border-left:0}
+  .tabpanel{grid-template-columns:1fr}
+  .tabpanel .auth{border-left:0;padding-left:0;border-top:1px solid #e3cfc8;padding-top:16px}
+  .vtl li{grid-template-columns:96px 22px minmax(0,1fr);gap:10px}
+  .meter-row{grid-template-columns:1fr 120px}
+  .meter-row p{grid-column:1/-1}
+  .hub{grid-template-columns:1fr}
+  .hub .row1 .ag::after,.hub .row3 .ag::before{display:none}
+  .clauses{grid-template-columns:1fr}
+}
+/* incidents */
+.incidents{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.incident{border-radius:22px;background:#fff;border:1px solid var(--line);padding:22px;display:grid;gap:10px;align-content:start}
+.incident .y{font-family:var(--display);font-weight:600;font-size:15px;color:var(--coral)}
+.incident h4{font-size:20px;letter-spacing:-.02em}
+.incident p{font-size:16.5px;line-height:1.5;color:var(--ink-soft)}
+.incident .lesson{font-family:var(--display);font-size:14.5px;font-weight:600;color:var(--ink);border-top:1px solid var(--line);padding-top:10px;line-height:1.4}
+.args{list-style:none;margin:0;padding:0;counter-reset:a;display:grid;gap:0;border-top:2px solid var(--ink)}
+.args li{counter-increment:a;display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);font-family:var(--display);font-size:30px;font-weight:300;color:var(--coral);line-height:1}
+.args b{font-family:var(--display);font-size:19px;letter-spacing:-.015em;display:block;margin-bottom:4px}
+.args span{font-size:17px;color:var(--ink-soft)}
+.versus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-radius:26px;overflow:hidden;border:1px solid var(--line)}
+.versus>div{padding:clamp(22px,3vw,32px);display:grid;gap:12px;align-content:start}
+.versus>div:first-child{background:#fff}
+.versus>div:last-child{background:var(--ink);color:#f6e9ec}
+.versus h4{font-size:22px;letter-spacing:-.025em}
+.versus ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:17px}
+.versus p{font-size:18px;line-height:1.5}
+.versus a{color:inherit}
+
+/* dark case files */
+.dark{background:var(--ink);color:#f6e9ec;border-top-color:transparent;position:relative;overflow:hidden}
+.dark::before{content:"";position:absolute;right:-12%;top:-220px;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(238,82,54,.32),rgba(238,82,54,0) 65%);pointer-events:none}
+.dark>.wrap{position:relative}
+.dark .ch-part{color:#b9a0ac}
+.dark .lead{color:#dcc6ce}
+.dark .note{color:#b9a0ac}
+.dark .cite,.dark .prose a{color:#fff;text-decoration-color:rgba(245,179,140,.7)}
+.dark .tbl-wrap{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.13)}
+.dark .tbl{color:#f6e9ec}
+.dark .tbl th{color:#b9a0ac;border-color:rgba(255,255,255,.13)}
+.dark .tbl td{border-color:rgba(255,255,255,.13)}
+.dark .card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.13)}
+.dark .card p,.dark .card li{color:#dcc6ce}
+.dark .card .k{color:var(--peach)}
+.dark .vtl .what p{color:#dcc6ce}
+.dark .vtl .dot::before{background:rgba(255,255,255,.18)}
+.dark .vtl .dot::after{background:var(--ink);border-color:var(--peach)}
+.dark .vtl .when{color:var(--peach)}
+.dark .bullets li{color:#dcc6ce}
+.dark .bullets b{color:#fff}
+.dark .verdict{background:linear-gradient(120deg,var(--rose),var(--coral) 60%,#f08a5f)}
+.dark .verdict::after{background:radial-gradient(circle,rgba(255,255,255,.25),rgba(255,255,255,0) 70%)}
+.dark .verdict h3{color:#fff;opacity:.85}
+.docket{display:flex;flex-wrap:wrap;gap:8px}
+.docket span{font-family:var(--display);font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:8px;border:1px dashed rgba(255,255,255,.35);color:#f3dcd2}
+.casefile{font-family:var(--display);font-size:15px;font-weight:600;color:var(--peach)}
+.dark .ch-num{color:var(--peach)}
+.catch{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;align-items:end;border-radius:30px;padding:clamp(26px,4vw,48px);background:linear-gradient(140deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12)}
+.catch q{font-family:var(--body);font-style:italic;font-weight:400;font-size:clamp(64px,11vw,156px);line-height:.9;letter-spacing:-.03em;color:#fff;quotes:"“" "”"}
+.catch q::before{color:var(--coral)}
+.catch q::after{color:var(--coral)}
+.catch p{font-size:18px;color:#dcc6ce;line-height:1.55;max-width:60ch}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:0;border-top:1px solid rgba(255,255,255,.18)}
+.facts>div{padding:18px 20px 18px 0;border-bottom:1px solid rgba(255,255,255,.13);display:grid;gap:6px}
+.facts>div:nth-child(even){padding-left:20px;border-left:1px solid rgba(255,255,255,.13)}
+.facts dt{font-family:var(--display);font-size:13.5px;font-weight:600;color:#b9a0ac}
+.facts dd{margin:0;font-size:18px;line-height:1.5}
+.facts a{color:#fff;text-decoration-color:rgba(245,179,140,.7);text-underline-offset:3px}
+
+@media (max-width:900px){
+  .incidents,.versus,.catch,.facts{grid-template-columns:1fr}
+  .facts>div:nth-child(even){padding-left:0;border-left:0}
+}
+/* risk matrix */
+.matrix-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.matrix{display:grid;grid-template-columns:28px repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(92px,auto)) 28px;gap:6px;font-family:var(--display)}
+.matrix .cell{border-radius:14px;background:#fff;border:1px solid var(--line);padding:10px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+.matrix .cell.hot{background:#fde1d6;border-color:#f6c2ae}
+.matrix .cell.warm{background:#fdf0e8}
+.matrix .ylab,.matrix .xlab{font-size:12.5px;font-weight:600;color:var(--ink-faint);display:flex;align-items:center;justify-content:center}
+.matrix .ylab{writing-mode:vertical-rl;transform:rotate(180deg)}
+.dotn{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;font-size:14px;font-weight:700}
+.cell.hot .dotn{background:var(--coral)}
+.axis-cap{font-family:var(--display);font-size:13px;color:var(--ink-faint);margin-top:8px}
+.risk-list{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.risk-list li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.risk-list b{font-family:var(--display);font-size:16.5px;display:block}
+.risk-list span{font-size:16px;color:var(--ink-soft)}
+
+/* SDGs */
+.ripple-wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:center}
+.ripple svg{width:100%;height:auto}
+.ripple text{font-family:var(--display);font-weight:600}
+.chain{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:c}
+.chain li{counter-increment:c;display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:18px}
+.chain li::before{content:counter(c);font-family:var(--display);font-weight:600;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--blush);color:var(--coral);font-size:15px}
+.sdgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sdg{border-radius:24px;background:#fff;border:1px solid var(--line);overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.sdg-top{display:flex;align-items:center;gap:16px;padding:18px 22px;color:#fff;font-family:var(--display)}
+.sdg-top .n{font-size:46px;font-weight:700;letter-spacing:-.05em;line-height:1}
+.sdg-top b{font-size:19px;line-height:1.15;letter-spacing:-.015em;display:block}
+.sdg-top span{font-size:13.5px;font-weight:500;opacity:.92}
+.sdg-body{padding:20px 22px 24px;display:grid;gap:14px;align-content:start}
+.sdg-body .t{font-size:16.5px;color:var(--ink-soft)}
+.pm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pm div{border-radius:14px;padding:12px 14px;font-size:15.5px;line-height:1.45;font-family:var(--display)}
+.pm .p{background:#eef8cc;color:#2f3a00}
+.pm .m{background:#fde3e6;color:#6e1230}
+.pm b{display:block;font-size:12.5px;margin-bottom:4px}
+.sdg-body .q{font-family:var(--display);font-weight:600;font-size:16.5px;border-top:1px solid var(--line);padding-top:12px}
+
+/* conclusion */
+.closing{font-family:var(--display);font-size:clamp(30px,3.8vw,50px);line-height:1.1;letter-spacing:-.035em;font-weight:600;max-width:26ch}
+.closing .soft{color:#b9a3ad}
+.findings4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.findings4 .card{background:var(--blush);border-color:transparent}
+
+/* activities */
+.activities{position:relative;overflow:hidden;padding-block:clamp(72px,9vw,128px);background:
+  radial-gradient(60% 70% at 0% 0%,#f7a2b4 0%,rgba(247,162,180,0) 60%),
+  radial-gradient(60% 70% at 100% 100%,#fbd9bf 0%,rgba(251,217,191,0) 70%),
+  linear-gradient(120deg,#f6a58c 0%,#f8bd9e 50%,#fbd5ba 100%)}
+.act-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:48px}
+.act-head h2{font-size:clamp(48px,7vw,104px);letter-spacing:-.055em;line-height:.92;color:#fff;text-shadow:0 2px 24px rgba(190,60,50,.2)}
+.act-head p{font-family:var(--display);font-size:19px;line-height:1.45;font-weight:500;max-width:40ch}
+.act{background:var(--paper);border-radius:32px;padding:clamp(22px,3.5vw,44px);display:grid;gap:28px;box-shadow:0 40px 80px -50px rgba(150,40,40,.6)}
+.act+.act{margin-top:20px}
+.act-title{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px}
+.act-title h3{font-size:clamp(28px,3vw,40px);letter-spacing:-.04em}
+.act-title span{font-family:var(--display);font-size:15px;font-weight:600;color:var(--coral)}
+.scenario{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:24px;align-items:start}
+.scene{border-radius:24px;background:var(--ink);color:#f6e9ec;padding:26px;display:grid;gap:14px;position:sticky;top:24px}
+.scene h4{font-size:15px;color:var(--peach)}
+.scene p{font-size:18px;line-height:1.55}
+.scene ol{margin:0;padding-left:20px;display:grid;gap:8px;font-size:16.5px;color:#dcc6ce}
+.polls{display:grid;gap:12px}
+.poll{border-radius:22px;background:#fff;border:1px solid var(--line);padding:20px;display:grid;gap:12px}
+.poll h4{font-size:19px;letter-spacing:-.02em;line-height:1.3}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font-family:var(--display);font-weight:600;font-size:15px;padding:11px 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;text-align:left;line-height:1.3}
+.opt:hover{border-color:var(--coral)}
+.opt[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.poll.revealed .opt.right{background:var(--lime);border-color:#b8d046;color:#2a3300}
+.poll.revealed .opt.wrong[aria-pressed="true"]{background:#fbd6df;border-color:#f1a9bb;color:#8a1236}
+.answer{display:none;border-radius:16px;background:var(--blush);padding:14px 16px;font-size:17px;line-height:1.5}
+.answer b{font-family:var(--display)}
+.poll.revealed .answer{display:block}
+.quiz{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:start}
+.qcard{border-radius:24px;background:#fff;border:1px solid var(--line);padding:clamp(20px,3vw,32px);display:grid;gap:18px}
+.qmeta{display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--display);font-size:14px;font-weight:600;color:var(--ink-faint)}
+.qdots{display:flex;gap:6px}
+.qdots i{width:22px;height:6px;border-radius:3px;background:var(--line)}
+.qdots i.done{background:var(--coral)}
+.qdots i.now{background:var(--ink)}
+.qcard h4{font-size:clamp(21px,2.2vw,26px);letter-spacing:-.025em;line-height:1.25}
+.qopts{display:grid;gap:8px}
+.qopt{font-family:var(--display);font-size:16.5px;font-weight:500;text-align:left;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:center}
+.qopt:hover:not([disabled]){border-color:var(--coral)}
+.qopt .l{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--blush);font-weight:700;font-size:13px}
+.qopt[disabled]{cursor:default}
+.qopt.right{background:#f1fad0;border-color:#b8d046}
+.qopt.right .l{background:var(--lime)}
+.qopt.wrong{background:#fdeaee;border-color:#f1a9bb}
+.qopt.wrong .l{background:#f7c3d0}
+.qexp{border-radius:16px;background:var(--blush);padding:14px 16px;font-size:17px;line-height:1.5}
+.qexp b{font-family:var(--display)}
+.qnav{display:flex;justify-content:flex-end;gap:10px}
+.score{border-radius:24px;background:var(--ink);color:#f6e9ec;padding:26px;display:grid;gap:12px;position:sticky;top:24px}
+.score .s{font-family:var(--display);font-size:64px;font-weight:600;letter-spacing:-.05em;line-height:1}
+.score .s small{font-size:24px;color:#b9a0ac;font-weight:500;letter-spacing:-.02em}
+.score p{font-size:17px;color:#dcc6ce}
+.score ul{margin:0;padding-left:18px;font-size:15.5px;color:#dcc6ce;display:grid;gap:6px}
+
+/* references + footer */
+.refs{padding-block:clamp(72px,9vw,120px)}
+.refs h2{font-size:clamp(36px,4vw,52px);letter-spacing:-.04em;margin-bottom:12px}
+.refs .intro{font-size:17px;color:var(--ink-soft);max-width:70ch;margin-bottom:36px}
+.refgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 48px}
+.refgrid section h3{font-size:16px;font-weight:600;border-top:2px solid var(--ink);padding-top:12px;margin-bottom:12px}
+.refgrid ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.refgrid li{font-size:15px;line-height:1.5;color:var(--ink-soft);padding-left:1.6em;text-indent:-1.6em;overflow-wrap:anywhere}
+.refgrid li a{color:var(--ink-soft);text-decoration-color:rgba(238,82,54,.45);text-underline-offset:2px}
+.foot{background:var(--ink);color:#e8d6dc;padding:64px 0 120px}
+.foot .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) repeat(3,minmax(0,1fr));gap:32px}
+.foot .wordmark{color:#fff;font-size:30px;display:inline-block;margin-bottom:12px}
+.foot p{font-family:var(--display);font-size:15px;line-height:1.55}
+.foot h4{font-size:13.5px;color:#b9a0ac;margin-bottom:10px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-family:var(--display);font-size:15px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--peach)}
+.foot .fill{color:var(--peach)}
+
+@media (max-width:1000px){
+  .matrix-wrap,.ripple-wrap,.scenario,.quiz,.act-head{grid-template-columns:1fr}
+  .scene,.score{position:static}
+  .foot .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .sdgs,.findings4,.refgrid,.pm{grid-template-columns:1fr}
+  .foot .wrap{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+<nav class="pill" aria-label="Chapters">
+  <a class="home" href="#top" aria-label="Back to the top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3.5 10.5 12 3.5l8.5 7V20a.5.5 0 0 1-.5.5h-5v-6h-6v6H4a.5.5 0 0 1-.5-.5z"/></svg></a>
+  <a href="#study" data-nav="study">Study</a>
+  <a href="#law" data-nav="law">Law</a>
+  <a href="#cases" data-nav="cases">Cases</a>
+  <a href="#business" data-nav="business">Business</a>
+  <a href="#sdgs" data-nav="sdgs">SDGs</a>
+  <a href="#s14" data-nav="forward">Way forward</a>
+  <a href="#activities" data-nav="activities">Activities</a>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="tokens" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="topbar">
+    <a class="wordmark" href="#top">Persona<i>&amp;</i>Property</a>
+    <div class="topbar-right">
+      <span class="course">MGT402M26 group project</span>
+      <a class="btn btn-line" href="#references">Sources</a>
+      <a class="btn btn-white" href="#activities">Take the quiz</a>
+    </div>
+  </div>
+  <div class="hero-body">
+    <h1>Who owns an influencer that doesn’t exist?</h1>
+    <div class="hero-aside">
+      <p>A study of AI virtual influencers and intellectual property law: who controls the identity, image, voice and endorsements of a persona that no human owns by birth.</p>
+      <div class="hero-actions">
+        <a class="btn btn-white" href="#study">Read the study</a>
+        <a class="btn btn-line" href="#activities">Run the activities</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <span><b class="num">15</b>chapters</span>
+    <span><b class="num">5</b>jurisdictions compared</span>
+    <span><b class="num">2</b>case studies</span>
+    <span><b class="num">4</b>SDGs analysed</span>
+    <span><b class="num">54</b>listed sources</span>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <h2>Instruments examined</h2>
+    <ul>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7.5"/><path d="M12.6 7.6a3.4 3.4 0 1 0 0 4.8"/></svg>Copyright Act, 1957</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7.5"/><path d="M6.5 7.5h4M8.5 7.5v5.5M11.5 13V7.5l1.5 3 1.5-3V13"/></svg>Trade Marks Act, 1999</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4.5h12v11H4zM7 8h6M7 11h4"/></svg>Consumer Protection Act, 2019</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="13" height="13" rx="3"/><path d="M7 10h6"/></svg>IT Amendment Rules, 2026</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3.5 16 6v4.5c0 3-2.6 5.3-6 6-3.4-.7-6-3-6-6V6z"/></svg>ASCI Influencer Guidelines, 2023</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4.5h12v11H4zM7 8h6M7 11h4"/></svg>FTC Endorsement Guides, 2023</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7.5"/><path d="M10 6v4l2.5 2"/></svg>EU AI Act, Article 50</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 15.5V4.5h7l3 3v8z"/></svg>NO FAKES Act of 2026 (bill)</li>
+    </ul>
+  </div>
+</div>
+
+<main>
+<section class="thesis" id="study" aria-labelledby="thesis-h">
+  <div class="wrap">
+    <h2 id="thesis-h" class="sr-only">Our argument</h2>
+    <p class="thesis-text">A virtual influencer is not one image. It is a bundle of rights <span class="ichip c1" aria-hidden="true">©</span> held by many hands <span class="ichip c3" aria-hidden="true">™</span> at once. <span class="soft">Whoever holds the signed assignments and the registered trademark <span class="ichip c2" aria-hidden="true">§</span> controls it.</span></p>
+
+    <div class="bento">
+      <article class="tile ava" aria-label="AVA, the hypothetical persona used in this study">
+        <span class="tag">Our running example, a hypothetical persona</span>
+        <div class="ava-card">
+          <div class="ava-top">
+            <div class="orb" aria-hidden="true"></div>
+            <div><b>AVA</b><span>@ava.virtual, Mumbai</span></div>
+          </div>
+          <div class="ava-label">Virtual influencer. Not a real person.</div>
+          <dl class="ava-hands">
+            <div><dt>Face designed by</dt><dd>Riya, freelance 3D artist</dd></div>
+            <div><dt>Managed by</dt><dd>PixelMint agency</dd></div>
+            <div><dt>Posts made with</dt><dd>A commercial AI image tool</dd></div>
+            <div><dt>Paid by</dt><dd>Threadline, fashion brand</dd></div>
+          </dl>
+        </div>
+      </article>
+      <article class="tile wide">
+        <div class="big num">USD 8–13 bn</div>
+        <p>Estimated global virtual-influencer market in 2025 across five research firms, growing 37–41% a year. Forecasts differ by almost 2x.</p>
+        <span class="src">See §2 for each estimate</span>
+      </article>
+      <article class="tile limeT">
+        <div class="big num">~40%</div>
+        <p>of Gen Z and millennials in a YouGov survey could not tell CGI influencers from real ones.</p>
+        <span class="src"><a href="https://yougov.com/articles/27837-about-40-gen-z-and-millennials-cant-tell-cgi-influ">YouGov, 2020</a></span>
+      </article>
+      <article class="tile inkT">
+        <div class="big num">2021</div>
+        <p>India's ASCI became the first national regulator to address virtual influencers expressly.</p>
+        <span class="src"><a href="https://www.infolawgroup.com/insights/2023/8/11/virtual-influencers-are-now-officially-regulated-endorsersunless-theyre-spokespersons">InfoLawGroup, 2023</a></span>
+      </article>
+      <article class="tile">
+        <div class="big num">₹50 lakh</div>
+        <p>Maximum CCPA penalty for repeat misleading endorsements, which expressly include virtual influencers.</p>
+        <span class="src"><a href="https://consumeraffairs.nic.in/sites/default/files/PIB1892527.pdf">Dept. of Consumer Affairs, 2023</a></span>
+      </article>
+      <article class="tile">
+        <div class="big num">31.08.26</div>
+        <p>India's Registrar of Copyrights rules that an AI system, DABUS, cannot be an author.</p>
+        <span class="src"><a href="https://www.business-standard.com/technology/artificial-intelligence/copyright-office-rejects-ai-system-dabus-as-author-under-indian-law-126090101299_1.html">Business Standard, 2026</a></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contents" aria-labelledby="toc-h">
+  <div class="wrap">
+    <h2 id="toc-h">Contents</h2>
+    <div class="toc">
+      <section aria-label="Part I">
+        <h3>Part I, context</h3>
+        <ol>
+          <li><a href="#s1"><span>§1</span>The rise of virtual influencers</a></li>
+          <li><a href="#s2"><span>§2</span>Facts and figures</a></li>
+          <li><a href="#s3"><span>§3</span>The ownership problem</a></li>
+        </ol>
+      </section>
+      <section aria-label="Part II">
+        <h3>Part II, the law</h3>
+        <ol>
+          <li><a href="#law"><span>§4</span>Copyright</a></li>
+          <li><a href="#s5"><span>§5</span>Trademark and passing off</a></li>
+          <li><a href="#s6"><span>§6</span>Personality rights</a></li>
+          <li><a href="#s7"><span>§7</span>Advertising and AI labels</a></li>
+          <li><a href="#s8"><span>§8</span>Contracts and licensing</a></li>
+        </ol>
+      </section>
+      <section aria-label="Part III">
+        <h3>Part III, evidence</h3>
+        <ol>
+          <li><a href="#s9"><span>§9</span>Critical analysis</a></li>
+          <li><a href="#cases"><span>§10</span>Case study: Lil Miquela</a></li>
+          <li><a href="#s11"><span>§11</span>Case study: Anil Kapoor</a></li>
+        </ol>
+      </section>
+      <section aria-label="Part IV">
+        <h3>Part IV, implications</h3>
+        <ol>
+          <li><a href="#business"><span>§12</span>Business implications</a></li>
+          <li><a href="#sdgs"><span>§13</span>Impact on the SDGs</a></li>
+          <li><a href="#s14"><span>§14</span>Recommendations</a></li>
+          <li><a href="#s15"><span>§15</span>Conclusion</a></li>
+          <li><a href="#activities"><span>+</span>Activities and quiz</a></li>
+        </ol>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- §1 -->
+<section class="chapter" id="s1" aria-labelledby="s1-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§1</span><span class="ch-part">Part I, context</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s1-h">The rise of AI virtual influencers</h2>
+        <p class="lead">A virtual influencer is a fictional, computer-generated persona run by a company. It posts, endorses products and builds a following the way a human creator does.</p>
+      </header>
+
+      <div class="prose">
+        <p>India's advertising self-regulator, ASCI, defines virtual influencers as fictional computer-generated people or avatars with the realistic features and personalities of humans, who behave like influencers (<a href="https://www.ascionline.in/wp-content/uploads/2023/08/GUIDELINES-FOR-INFLUENCER-ADVERTISING-IN-DIGITAL-MEDIA.pdf">ASCI, 2023</a>). The definition matters because it carries a duty: in India, such a persona must tell its audience it is not a real person.</p>
+      </div>
+
+      <div class="block">
+        <h3>How a persona is built</h3>
+        <div class="steps">
+          <article class="step">
+            <span class="yr">From 2016</span>
+            <h4>CGI and 3D modelling</h4>
+            <p>Artists model a face and body by hand. Imma, Japan's best-known virtual human, is a computer-generated face composited onto photos of a real human model (<a class="cite" href="https://www.bloomberg.com/news/articles/2020-09-03/virtual-star-of-porsche-ads-gets-real-venture-backing">Bloomberg, 2020</a>).</p>
+          </article>
+          <article class="step">
+            <span class="yr">From 2022</span>
+            <h4>Generative AI</h4>
+            <p>Image and video models produce posts from prompts and reference images. Barcelona agency The Clueless built Aitana López this way (<a class="cite" href="https://www.entrepreneur.com/business-news/this-ai-fitness-model-makes-11000-a-month/465975">Entrepreneur, 2023</a>).</p>
+          </article>
+          <article class="step">
+            <span class="yr">From 2024</span>
+            <h4>Synthetic voice and conversation</h4>
+            <p>Designed or cloned voices and chat models let a persona talk to followers in real time. Imma's maker, Aww Inc., has focused on conversational-AI virtual humans since 2024 (<a class="cite" href="https://markezine.jp/article/detail/48674?p=1">MarkeZine, 2025</a>).</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Human and virtual influencers compared</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Dimension</th><th scope="col">Human influencer</th><th scope="col">Virtual influencer</th></tr></thead>
+            <tbody>
+              <tr><td>Identity</td><td>Belongs to a real person</td><td>Built by a company as a bundle of IP assets</td></tr>
+              <tr><td>Who speaks</td><td>The influencer</td><td>A team of designers, writers, AI tools and managers</td></tr>
+              <tr><td>Control</td><td>Negotiated with the person</td><td>Total control by the brand or agency</td></tr>
+              <tr><td>Availability</td><td>Limited; can age, quit or fall ill</td><td>Always on, in any location, ageless</td></tr>
+              <tr><td>Scandal risk</td><td>Personal conduct</td><td>Design choices, deception, misuse of a real likeness</td></tr>
+              <tr><td>Legal default</td><td>Personality rights protect the person</td><td>No personality rights of its own; protected through copyright, trademark and contract</td></tr>
+              <tr><td>Disclosure in India</td><td>Paid-partnership label</td><td>Paid-partnership label plus a “not a real human” label</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="cols-2">
+        <div class="card">
+          <span class="k">Why brands use them</span>
+          <h4>Control, cost and constant content</h4>
+          <p>The Clueless created Aitana because human influencers were costly and unreliable, and says AI models let smaller brands afford influencer marketing (<a class="cite" href="https://fortune.com/europe/2023/11/23/spanish-influencer-agency-earned-11000-ai-model-posers/">Fortune, 2023</a>).</p>
+          <ul>
+            <li>Full creative control and brand safety</li>
+            <li>Content around the clock at low marginal cost</li>
+            <li>Novelty and high engagement with young audiences</li>
+            <li>A persona the brand can hold as a long-term asset</li>
+          </ul>
+        </div>
+        <div class="card" style="background:var(--blush);border-color:transparent">
+          <span class="k">The central problem</span>
+          <h4>Many makers, no default owner</h4>
+          <p>A human influencer owns their identity by default. A virtual influencer is assembled by a designer, an agency, an AI platform and a paying brand, and no single law says who owns the result.</p>
+          <p>This study asks whether copyright, trademark, personality rights, advertising rules and contracts can answer that question.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §2 -->
+<section class="chapter" id="s2" aria-labelledby="s2-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§2</span><span class="ch-part">Part I, context</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s2-h">Facts and figures</h2>
+        <p class="lead">Five research firms value the 2025 market between USD 8.3 and 12.8 billion, growing 37–41% a year. Because they disagree by almost 2x, we present the figures as a range.</p>
+      </header>
+
+      <figure class="chart" id="market" aria-label="Bar chart of 2025 virtual influencer market estimates by research firm">
+        <figcaption><b>Virtual-influencer market, 2025 estimates</b><span>USD billion, by research firm, with each firm's long-range forecast and annual growth rate</span></figcaption>
+        <div class="bars" id="market-bars"></div>
+        <div class="axis" aria-hidden="true"><span></span><div><span>0</span><span>5</span><span>10</span><span>15</span></div><span></span></div>
+      </figure>
+
+      <aside class="aside-note">
+        <h4>Why the spread matters</h4>
+        <p>These are commercial projections with undisclosed methods. Market.us adds a sixth view, USD 6.1 billion in 2024 rising to 170.2 billion by 2034 (<a class="cite" href="https://market.us/report/virtual-influencers-market/">Market.us</a>). The disagreement itself shows how hard it is to value an asset whose ownership is unclear.</p>
+      </aside>
+
+      <div class="block">
+        <h3>The personas that defined the field</h3>
+        <div class="roster">
+          <article class="persona">
+            <div class="mono" style="background:linear-gradient(135deg,#dc4570,#ee5236)">LM</div>
+            <h4>Lil Miquela</h4>
+            <span class="meta">United States, 2016<br>Brud, acquired by Dapper Labs in 2021</span>
+            <p>Prada Instagram takeover in 2018, Calvin Klein and Samsung campaigns in 2019; named among TIME's 25 most influential people on the internet (<a href="https://time.com/5324130/most-influential-internet/">TIME, 2018</a>).</p>
+          </article>
+          <article class="persona">
+            <div class="mono" style="background:linear-gradient(135deg,#f08aa6,#dc4570)">IM</div>
+            <h4>Imma</h4>
+            <span class="meta">Japan, 2018<br>Aww Inc., Tokyo</span>
+            <p>Asia's first virtual human; work for IKEA, Porsche Japan, Magnum and Hugo Boss, and her own label Astral Body (<a href="https://virtualhumans.org/article/imma-the-virtual-influencer-disrupting-the-fashion-industry">Virtual Humans</a>; <a href="https://www.wipo.int/academy/en/news/2022/news_0002.html">WIPO, 2022</a>).</p>
+          </article>
+          <article class="persona">
+            <div class="mono" style="background:linear-gradient(135deg,#ee5236,#f5b38c)">AL</div>
+            <h4>Aitana López</h4>
+            <span class="meta">Spain, 2023<br>The Clueless agency, Barcelona</span>
+            <p>Reportedly earns EUR 3,000 to 10,000 a month, about EUR 1,000 per advert (<a href="https://www.businessinsider.nl/an-agency-created-an-ai-model-who-earns-up-to-11000-a-month-because-it-was-tired-of-influencers-who-have-egos">Business Insider, 2023</a>).</p>
+          </article>
+          <article class="persona">
+            <div class="mono" style="background:linear-gradient(135deg,#24141f,#8a2a4a)">KY</div>
+            <h4>Kyra</h4>
+            <span class="meta">India, January 2022<br>TopSocial India; later reports credit FUTR Studios</span>
+            <p>Called India's first virtual influencer; worked with boAt and Amazon Prime Video (<a href="https://qz.com/india/2175832/indias-first-metaverse-influencer-kyra-is-instagram-famous">Quartz</a>; <a href="https://www.afaqs.com/news/digital/are-virtual-influencers-a-fad-in-india">afaqs</a>).</p>
+          </article>
+          <article class="persona">
+            <div class="mono" style="background:linear-gradient(135deg,#f5b38c,#dc4570)">NA</div>
+            <h4>Naina</h4>
+            <span class="meta">India, 2022<br>Avtr Meta Labs</span>
+            <p>One of India's pioneering virtual influencers (<a href="https://www.business-standard.com/opinion/columns/are-virtual-influencers-impactful-124021601278_1.html">Business Standard, 2024</a>).</p>
+          </article>
+        </div>
+        <p class="note">Kyra shows the core problem in miniature: public sources name different creators for the same persona, so even the question of who owns it is hard to answer from outside.</p>
+      </div>
+
+      <div class="block">
+        <h3>What consumers think</h3>
+        <div class="findings">
+          <div class="finding"><span class="fig num">41% / 23%</span><p>saw human influencers as more authentic, against those who trusted CGI influencers; yet respondents rated CGI influencers more effective at prompting purchases (<a class="cite" href="https://yougov.com/articles/27837-about-40-gen-z-and-millennials-cant-tell-cgi-influ">YouGov, 2020</a>).</p></div>
+          <div class="finding"><span class="fig num">352</span><p>Instagram users in a University of Florida study found virtual influencers less authentic, but competitive for functional products and weaker for symbolic and experiential ones (<a class="cite" href="https://www.jou.ufl.edu/insights/pixels-vs-people-the-battle-for-consumer-trust-in-influencer-marketing/">UF College of Journalism</a>).</p></div>
+          <div class="finding"><span class="fig num">76%</span><p>of 4,000 US and UK consumers said they trust virtual influencers for product recommendations in a 2024 survey, while 62% of human creators worried about more competition (<a class="cite" href="https://www.agilitypr.com/?p=99265">Agility PR</a>).</p></div>
+          <div class="finding"><span class="fig num">2025</span><p>Syracuse University research found that the more human a virtual influencer looks, the more people trust its message (<a class="cite" href="https://news.syr.edu/2025/11/25/how-much-do-we-trust-virtual-influencers">Syracuse News</a>).</p></div>
+        </div>
+      </div>
+
+      <div class="verdict">
+        <h3>What this means for the law</h3>
+        <p>The more realistic the persona, the more it persuades, and the greater the risk of deceiving consumers or copying a real person's likeness.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §3 -->
+<section class="chapter" id="s3" aria-labelledby="s3-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§3</span><span class="ch-part">Part I, context</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s3-h">The ownership problem</h2>
+        <p class="lead">A virtual influencer is a bundle of separate rights: design, name, content, voice, data and goodwill. Each can belong to a different party.</p>
+      </header>
+
+      <div class="block">
+        <h3>Take AVA apart</h3>
+        <p class="sub">Select a part of the persona to see what protects it and who owns it when no contract says otherwise.</p>
+        <div class="explorer">
+          <div class="ring" id="ring">
+            <div class="core"><div><b>AVA</b><span>one persona</span></div></div>
+          </div>
+          <div class="detail" id="asset-detail" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Who contributes, and what each could claim</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Contributor</th><th scope="col">Contribution</th><th scope="col">Possible claim</th><th scope="col">Weakness of the claim</th></tr></thead>
+            <tbody>
+              <tr><td>Freelance designer</td><td>Creates the look</td><td>Copyright in the artwork</td><td>Lost if assigned in writing; weak over later AI outputs</td></tr>
+              <tr><td>Employee designer</td><td>Same</td><td>Usually none</td><td>The employer owns work made under a contract of service</td></tr>
+              <tr><td>Agency</td><td>Concept, management, account, deals</td><td>Commissioner, trademark owner, operator</td><td>Needs written assignments from freelancers; AI outputs may be unprotected</td></tr>
+              <tr><td>AI platform</td><td>The model that generates content</td><td>Rights reserved in its terms of service</td><td>Most major platforms assign output rights to users, but terms vary</td></tr>
+              <tr><td>Prompt and content team</td><td>Prompts, selection, editing</td><td>Authorship of selected, arranged or edited output</td><td>Prompts alone are not enough in the US</td></tr>
+              <tr><td>Brand</td><td>Pays for campaigns</td><td>Licensed use; sometimes commissions the persona</td><td>Limited to what the contract grants</td></tr>
+              <tr><td>Real person</td><td>Body, face or voice used as reference</td><td>Personality rights; contract</td><td>Strong if identifiable and unlicensed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Three hard questions this creates</h3>
+        <div class="trio">
+          <div><h4>Design or output?</h4><p>Owning the original artwork does not mean owning every image an AI later generates of that character.</p></div>
+          <div><h4>Character or identity?</h4><p>Copyright protects creative work; personality rights protect real people. A fictional persona has none of its own, but the people it resembles do.</p></div>
+          <div><h4>Law or contract?</h4><p>Because the law leaves gaps, contracts and platform terms decide ownership in practice. Whoever drafted the contract usually owns the persona.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §4 -->
+<section class="chapter" id="law" aria-labelledby="s4-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§4</span><span class="ch-part">Part II, the law</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s4-h">Copyright: who owns the character and its content?</h2>
+        <p class="lead">Copyright clearly protects a character a human designed. Protection for AI-generated posts depends on the country: India credits the person who “causes” the work, the US requires real human authorship, and China has protected a prompted image.</p>
+      </header>
+
+      <div class="block">
+        <h3>What copyright can protect in a persona</h3>
+        <div class="kinds">
+          <div><b>Artistic works</b><span>Character sheets, face and body design, outfits, logo</span></div>
+          <div><b>Literary works</b><span>Backstory, captions, scripts, lyrics</span></div>
+          <div><b>Films and recordings</b><span>Videos, music, voice recordings</span></div>
+          <div><b>Computer programs</b><span>3D model code, rigs, custom tools</span></div>
+        </div>
+        <p class="note">Copyright protects expression, not ideas. “A pink-haired virtual model from Tokyo” is free for anyone to use; a specific design is not.</p>
+      </div>
+
+      <div class="block">
+        <h3>The Indian provisions that decide ownership</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Provision</th><th scope="col">Rule</th><th scope="col">Why it matters here</th></tr></thead>
+            <tbody>
+              <tr><td>Copyright Act 1957, s.13</td><td>Protects original literary, dramatic, musical and artistic works, films and sound recordings</td><td>Designs and posts must be original; Indian courts require a “modicum of creativity” (<em>Eastern Book Co. v. D.B. Modak</em>, SC 2008)</td></tr>
+              <tr><td>s.2(d)(vi)</td><td>For a computer-generated work, the author is the person who causes the work to be created</td><td>India has a rule for machine-made works, unlike the US, but it does not say who “causes” the work when designer, prompter, agency and platform all contribute</td></tr>
+              <tr><td>s.17</td><td>The author is first owner; an employer owns work made under a contract of service; some commissioned works go to the commissioner</td><td>Employee-designed characters belong to the agency; a freelance designer usually keeps copyright unless they assign it</td></tr>
+              <tr><td>s.18–19</td><td>Assignment must be in writing and signed; with no term stated it lasts 5 years, with no territory stated it covers India only</td><td>An agency that pays a freelancer without a written assignment may not own the character, or only for 5 years in India</td></tr>
+              <tr><td>s.57</td><td>Moral rights of attribution and integrity survive assignment</td><td>A designer can object to distortion of their character even after selling it</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>India's AI-authorship record so far</h3>
+        <ol class="vtl">
+          <li><span class="when">2020–21</span><span class="dot" aria-hidden="true"></span><div class="what"><b>RAGHAV and <i>Suryast</i></b><p>Lawyer Ankit Sahni registered an AI-assisted artwork naming himself and his AI tool RAGHAV as co-authors. The Copyright Office then issued a withdrawal notice questioning RAGHAV's legal status (<a class="cite" href="https://www.managingip.com/article/2a5bqtj8ume32iwlaoy5y/exclusive-indian-copyright-office-issues-withdrawal-notice-to-ai-co-author">Managing IP</a>).</p></div></li>
+          <li><span class="when">8 Dec 2025</span><span class="dot" aria-hidden="true"></span><div class="what"><b>DPIIT Working Paper, Part 1</b><p>A government committee proposed a mandatory blanket licence for AI training, with royalties paid through a central body (<a class="cite" href="https://www.mondaq.com/india/copyright/1718746/exploring-the-dpiits-working-paper-on-generative-ai-and-copyright">Ikigai Law via Mondaq</a>).</p></div></li>
+          <li><span class="when">31 Aug 2026</span><span class="dot" aria-hidden="true"></span><div class="what"><b>The DABUS order</b><p>The Registrar of Copyrights held Stephen Thaler's AI-generated artwork original, but ruled that the AI system DABUS cannot be an author because it is not a natural or juristic person. Thaler, who caused the work, could be (<a class="cite" href="https://www.business-standard.com/technology/artificial-intelligence/copyright-office-rejects-ai-system-dabus-as-author-under-indian-law-126090101299_1.html">Business Standard</a>; <a class="cite" href="https://www.livelawbiz.com/copyright/copyright-office-rejects-bid-to-register-ai-system-dabus-as-author-of-artwork-548065">LiveLaw</a>). It is an administrative order, not a court ruling.</p></div></li>
+          <li class="pending"><span class="when">Pending</span><span class="dot" aria-hidden="true"></span><div class="what"><b>DPIIT Working Paper, Part 2</b><p>The paper on authorship and ownership of AI outputs was due in early 2026 and remained unpublished as of October 2026 (<a class="cite" href="https://dig.watch/updates/india-ai-copyright-committee-second-working-paper">Digital Watch</a>).</p></div></li>
+        </ol>
+      </div>
+
+      <div class="block">
+        <h3>Five jurisdictions compared</h3>
+        <div class="tabs" data-tabs>
+          <div class="tablist" role="tablist" aria-label="Jurisdiction">
+            <button role="tab" id="t-in" aria-controls="p-in" aria-selected="true">India</button>
+            <button role="tab" id="t-us" aria-controls="p-us" aria-selected="false" tabindex="-1">United States</button>
+            <button role="tab" id="t-uk" aria-controls="p-uk" aria-selected="false" tabindex="-1">United Kingdom</button>
+            <button role="tab" id="t-cn" aria-controls="p-cn" aria-selected="false" tabindex="-1">China</button>
+            <button role="tab" id="t-eu" aria-controls="p-eu" aria-selected="false" tabindex="-1">European Union</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-in" aria-labelledby="t-in">
+            <div><h4>The person who causes the work is the author</h4><p>s.2(d)(vi) gives computer-generated works a human author. The 2026 DABUS order confirms an AI cannot be that author, but leaves open which human “causes” a work made by several hands.</p></div>
+            <div class="auth"><b>Key authority</b><span>Copyright Act 1957, s.2(d)(vi)</span><span>Registrar of Copyrights, DABUS order, 31 Aug 2026</span></div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-us" aria-labelledby="t-us" hidden>
+            <div><h4>Only human authorship counts</h4><p>Prompts alone, even detailed or repeated, are not enough. Human selection, arrangement and modification of AI output can be protected.</p></div>
+            <div class="auth"><b>Key authority</b><a href="https://ipwatchdog.com/2025/01/29/part-two-copyright-office-ai-report-says-creative-prompting-doesnt-constitute-authorship/id=185455/">US Copyright Office, AI Report Part 2, 29 Jan 2025</a><a href="https://www.mayerbrown.com/insights/publications/2025/03/appellate-court-confirms-copyright-statute-limits-authorship-to-humans-foreclosing-copyright-registration-for-content-solely-generated-by-ai"><i>Thaler v. Perlmutter</i>, D.C. Cir., 18 Mar 2025</a><a href="https://www.hklaw.com/en/insights/publications/2026/03/the-final-word-supreme-court-refuses-to-hear-case-on-ai-authorship">Supreme Court denied review, 2 Mar 2026</a></div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-uk" aria-labelledby="t-uk" hidden>
+            <div><h4>The person who made the arrangements, for now</h4><p>s.9(3) CDPA 1988 gives computer-generated works an author: the person who made the necessary arrangements. The government's March 2026 report proposes repealing it while keeping protection for AI-assisted human work.</p></div>
+            <div class="auth"><b>Key authority</b><span>Copyright, Designs and Patents Act 1988, s.9(3)</span><a href="https://www.hsfkramer.com/notes/ip/2026-03/uk-government-report-on-copyright-and-ai-concludes-more-evidence-is-needed-although-s9-3-cdpa-could-go">HSF Kramer on the March 2026 report</a></div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-cn" aria-labelledby="t-cn" hidden>
+            <div><h4>A prompted image can be protected</h4><p>A Stable Diffusion image was protected because the user chose over 150 prompts, ordered them and set parameters. The user is the author; the model's designers are not.</p></div>
+            <div class="auth"><b>Key authority</b><a href="https://legalblogs.wolterskluwer.com/copyright-blog/beijing-internet-court-grants-copyright-to-ai-generated-image-for-the-first-time/"><i>Li v. Liu</i>, Beijing Internet Court, 27 Nov 2023</a></div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-eu" aria-labelledby="t-eu" hidden>
+            <div><h4>Originality assumes a human mind</h4><p>Originality means the author's own intellectual creation, which presupposes a human. There is no AI-specific authorship rule.</p></div>
+            <div class="auth"><b>Key authority</b><span>CJEU case law, e.g. <i>Infopaq</i> (2009)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Applied to AVA</h3>
+        <ul class="bullets">
+          <li><b>The original design</b> belongs to Riya, the designer, unless she is an employee or signed a written assignment.</li>
+          <li><b>Each AI-generated post:</b> in India, whoever “caused” it is the author, but the law does not say whether that is the prompt-writer, the agency or the platform. In the US, a purely prompted post may have no copyright, so anyone could copy it.</li>
+          <li><b>Design copyright does not cover every output.</b> PixelMint can sue over posts that copy AVA's protected design, but cannot claim copyright in an AI image that only resembles her style.</li>
+          <li><b>Infringement runs both ways.</b> If the AI tool reproduces someone else's protected work in AVA's content, the agency and the brand may both be liable.</li>
+        </ul>
+      </div>
+
+      <div class="verdict">
+        <h3>Our assessment</h3>
+        <p>s.2(d)(vi) looks forward-thinking, but it was added in 1994 for simple computer programs. With several contributors, “the person who causes” is unclear, which is why contracts, not the statute, decide ownership in practice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §5 -->
+<section class="chapter" id="s5" aria-labelledby="s5-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§5</span><span class="ch-part">Part II, the law</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s5-h">Trademark and passing off: the persona as a brand</h2>
+        <p class="lead">Trademark is the most reliable way to own a virtual influencer's commercial identity. It protects the name and look as a source of goods and services, and it lasts as long as it is used and renewed.</p>
+      </header>
+
+      <div class="cols-2">
+        <div class="card">
+          <span class="k">Trade Marks Act 1999, s.2(1)(m) and s.2(1)(zb)</span>
+          <h4>What a persona can register</h4>
+          <ul>
+            <li>Word mark: the persona's name, such as “AVA”</li>
+            <li>Device mark: a stylised face, silhouette or logo</li>
+            <li>A slogan or catchphrase used in campaigns</li>
+            <li>Classes 9 (downloadable images, virtual goods), 25 (clothing), 35 (advertising), 41 (entertainment and online content)</li>
+            <li>Registration lasts 10 years and renews indefinitely (s.25)</li>
+          </ul>
+        </div>
+        <article class="cert" aria-label="Example: MIQUELA trademark registrations">
+          <span class="seal">Real example, United States</span>
+          <h4>MIQUELA</h4>
+          <dl>
+            <dt>Reg. No.</dt><dd class="num">7224981 (Nov 2023)</dd>
+            <dt>Covers</dt><dd>Clothing, advertising, entertainment</dd>
+            <dt>Reg. No.</dt><dd class="num">7316489 (Feb 2024)</dd>
+            <dt>Covers</dt><dd>Class 9 goods</dd>
+            <dt>Owner</dt><dd>Brud, Inc.</dd>
+          </dl>
+          <p>The persona's brand value sits in a registered asset that can be bought, sold or licensed (<a class="cite" href="https://markinton.com/trademark/miquela-88405039">Markinton</a>; <a class="cite" href="https://markinton.com/trademark/miquela-88764568">Markinton</a>).</p>
+        </article>
+      </div>
+
+      <div class="block">
+        <h3>What trademark does and does not stop</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Scenario</th><th scope="col">Protected?</th><th scope="col">Basis</th></tr></thead>
+            <tbody>
+              <tr><td>A rival launches “AVVA”, a fashion influencer</td><td><span class="chip yes">Likely yes</span></td><td>Infringement of a similar mark for similar services (s.29); refusal of the rival's application (s.11)</td></tr>
+              <tr><td>A rival sells T-shirts printed “AVA”</td><td><span class="chip yes">Yes</span></td><td>If registered in Class 25 or reputation is proven: infringement or passing off</td></tr>
+              <tr><td>A rival creates a differently named influencer with a similar face and style</td><td><span class="chip maybe">Weak</span></td><td>Copyright if the design is copied; passing off if consumers are misled</td></tr>
+              <tr><td>An unregistered persona is copied</td><td><span class="chip maybe">Possible</span></td><td>Passing off survives (s.27(2)); the owner must prove goodwill, misrepresentation and damage</td></tr>
+              <tr><td>A generic name such as “Virtual Girl”</td><td><span class="chip no">No</span></td><td>Lacks distinctiveness (s.9)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="cols-2">
+        <div class="card">
+          <span class="k">Character merchandising in India</span>
+          <h4>No dedicated statute</h4>
+          <p>Protection comes from copyright in the artwork, trademark protection for the name and distinctive elements, and judge-made passing-off and personality doctrines (<a class="cite" href="https://ksandk.com/intellectual-property-rights/character-merchandising-licensing-india/">King Stubb &amp; Kasiva, 2026</a>). Toys and figurines can also be protected under the Designs Act, 2000 (<a class="cite" href="https://www.managingip.com/article/2epk19bks6jbzmkrihqtc/sponsored-content/console-to-courtroom-decoding-indias-safeguarding-of-video-game-characters">Managing IP</a>).</p>
+        </div>
+        <div class="card">
+          <span class="k">Risk in the other direction</span>
+          <h4>Infringing someone else's mark</h4>
+          <ul>
+            <li>A persona that resembles a mascot or well-known mark can be sued; well-known marks are protected even across unrelated goods (s.11(2)).</li>
+            <li>Generative AI can reproduce logos or branded products in posts without anyone intending it.</li>
+            <li>A clearance search before naming and launching is essential.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="verdict">
+        <h3>Why trademark matters most</h3>
+        <p>Copyright in AI-generated posts is uncertain; a registered name is not. Whoever registers the mark controls the persona commercially. If a designer files first, the agency may have to buy back its own influencer's name. Imma shows the upside: she launched her own label, Astral Body, moving from face of other brands to brand owner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §6 -->
+<section class="chapter" id="s6" aria-labelledby="s6-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§6</span><span class="ch-part">Part II, the law</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s6-h">Personality rights: can a digital identity be owned or imitated?</h2>
+        <p class="lead">Personality rights protect real people, not fictional ones. A virtual influencer has none of its own, but it can infringe the rights of any real person whose face, voice, name or mannerisms it copies.</p>
+      </header>
+
+      <div class="prose">
+        <p>These rights let a person control commercial use of their name, image, likeness, voice, signature, catchphrases and mannerisms. India has no statute: courts derive them from the right to privacy and dignity under Article 21 (<i>K.S. Puttaswamy v. Union of India</i>, SC 2017; <i>R. Rajagopal v. State of Tamil Nadu</i>, SC 1994), combined with passing off, trademark and copyright (<a href="https://webiis08.mondaq.com/india/trademark/1698818/protection-of-celebrity-and-personality-rights-in-india-the-need-for-stronger-safeguards">Mondaq</a>). The claimant must be identifiable from the infringing use, so protection mainly helps people whose identity has commercial value.</p>
+      </div>
+
+      <div class="block">
+        <div class="scroller-head">
+          <h3 style="font-size:clamp(24px,2.3vw,30px);letter-spacing:-.03em">Two decades of Indian case law</h3>
+          <div class="scroller-btns">
+            <button type="button" data-scroll="-1" aria-label="Earlier cases"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4 6 10l6 6"/></svg></button>
+            <button type="button" data-scroll="1" aria-label="Later cases"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m8 4 6 6-6 6"/></svg></button>
+          </div>
+        </div>
+        <div class="cases-track" id="cases-track" tabindex="0" aria-label="Indian personality rights cases, 2003 to 2025">
+          <article class="case"><span class="y">2003</span><h4>ICC Development v. Arvee Enterprises</h4><span class="court">Delhi High Court</span><p>Publicity rights belong to individuals, not to events.</p></article>
+          <article class="case"><span class="y">2010</span><h4>DM Entertainment v. Baby Gift House</h4><span class="court">Delhi High Court</span><p>Dolls imitating singer Daler Mehndi's persona restrained.</p></article>
+          <article class="case"><span class="y">2012</span><h4>Titan Industries v. Ramkumar Jewellers</h4><span class="court">Delhi High Court</span><p>Unauthorised use of Amitabh and Jaya Bachchan's endorsement images infringes publicity rights.</p></article>
+          <article class="case"><span class="y">2015</span><h4>Shivaji Rao Gaikwad v. Varsha Productions</h4><span class="court">Madras High Court</span><p>Rajinikanth's name, image and style protected even without proof of falsity.</p></article>
+          <article class="case"><span class="y">2022</span><h4>Amitabh Bachchan v. Rajat Nagi</h4><span class="court">Delhi High Court</span><p>Broad injunction covering voice, image and quiz-show fraud online.</p></article>
+          <article class="case ai"><span class="y">2023</span><h4>Anil Kapoor v. Simply Life India</h4><span class="court">Delhi High Court</span><p>First order expressly targeting AI deepfakes, voice cloning, GIFs and the catchphrase “Jhakaas”. See §11.</p></article>
+          <article class="case ai"><span class="y">2024</span><h4>Karan Johar v. Indian Pride Advisory</h4><span class="court">Bombay High Court</span><p>Unauthorised commercial use of his name and persona restrained (<a href="https://www.wipo.int/en/web/wipo-magazine/articles/ai-voice-cloning-how-a-bollywood-veteran-set-a-legal-precedent-73631">WIPO Magazine</a>).</p></article>
+          <article class="case ai"><span class="y">2024</span><h4>Jackie Shroff v. The Peppy Store</h4><span class="court">Delhi High Court, 15 May</span><p>Restrained an unlicensed AI chatbot imitating his persona; protected his registered marks BHIDU (<a href="https://www.scconline.com/blog/post/2024/05/21/dhc-restrains-entities-infringing-jackie-shroff-publicity-personality-rights/">SCC Online</a>).</p></article>
+          <article class="case ai"><span class="y">2024</span><h4>Arijit Singh v. Codible Ventures</h4><span class="court">Bombay High Court, 26 July</span><p>First Indian judgment on generative-AI voice cloning: converting any voice into a celebrity's without consent violates personality rights (<a href="https://barandbench.com/news/bombay-high-court-interim-relief-arijit-singh-personality-rights">Bar &amp; Bench</a>).</p></article>
+          <article class="case ai"><span class="y">2025</span><h4>Aishwarya Rai Bachchan</h4><span class="court">Delhi High Court, September</span><p>AI deepfakes and morphing restrained; Google directed to remove flagged URLs (<a href="https://theprint.in/india/delhi-hc-restrains-misuse-of-aishwarya-rais-identity-orders-takedown-of-flagged-urls/2741017">ThePrint</a>).</p></article>
+        </div>
+        <p class="note">Highlighted cards are AI-era orders. Their pattern: fast, often ex parte interim injunctions; orders against unknown infringers; takedown directions to platforms; and explicit coverage of AI tools, chatbots, voice models and deepfakes.</p>
+      </div>
+
+      <div class="block">
+        <h3>Beyond India</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Jurisdiction</th><th scope="col">Approach</th><th scope="col">Status, Nov 2026</th></tr></thead>
+            <tbody>
+              <tr><td>United States, states</td><td>Right-of-publicity laws; eight states have laws on AI digital replicas: Tennessee, California, Illinois, New York, Utah, Arkansas, Montana, Washington (<a href="https://www.bytebacklaw.com/2026/08/a-federal-shift-in-ai-and-the-right-of-publicity-no-fakes-act-advances-in-congress/">Byte Back</a>). Tennessee's ELVIS Act (2024) came first.</td><td><span class="chip yes">In force</span></td></tr>
+              <tr><td>United States, federal</td><td>NO FAKES Act of 2026 (S.4591): a federal right over voice and visual likeness, liability for unauthorised replicas, platform takedown (<a href="https://www.manatt.com/insights/newsletters/client-alert/congress-reintroduces-the-no-fakes-act-what-s-new-in-the-2026-bill">Manatt</a>)</td><td><span class="chip maybe">Bill, passed committee June 2026</span></td></tr>
+              <tr><td>Denmark</td><td>A new right over one's own face, voice and body, modelled on copyright's neighbouring rights (<a href="https://eprs.europarl.europa.eu/contents/publications/EPRS/2026/01/EPRS_ATA(2026)782611.html">EPRS</a>)</td><td><span class="chip maybe">Bill, introduced Oct 2026</span></td></tr>
+              <tr><td>United Kingdom</td><td>No general image right; a personality or digital-replica right is under consideration (<a href="https://www.simmons-simmons.com/en/publications/cmn8tmopv0050ustoq2e6ndz2/a-masterclass-in-can-kicking-uk-government-views-on-ai-and-copyright">Simmons &amp; Simmons</a>)</td><td><span class="chip">Consultation</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="cols-2">
+        <div class="card"><span class="k">Implication 1</span><h4>A fictional persona has no personality rights</h4><p>AVA cannot sue over “her” identity. PixelMint must rely on copyright, trademark and contract.</p></div>
+        <div class="card"><span class="k">Implication 2</span><h4>Resembling a real person is the largest risk</h4><p>If AVA's face, voice or catchphrases evoke a celebrity, that person can obtain an injunction quickly, as Anil Kapoor, Jackie Shroff and Arijit Singh did.</p></div>
+        <div class="card"><span class="k">Implication 3</span><h4>Hidden humans have rights too</h4><p>Body models (as with Imma), voice actors and people whose photos trained a model may have claims. After AI rapper FN Meka was dropped, rapper Kyle the Hooligan publicly claimed he was its original voice.</p></div>
+        <div class="card"><span class="k">Implication 4</span><h4>Platforms are now in the frame</h4><p>Courts direct Google, YouTube and chatbot hosts to remove content, so “the AI made it” is no defence for an agency.</p></div>
+      </div>
+
+      <div class="verdict">
+        <h3>Our assessment</h3>
+        <p>Indian protection is court-made, celebrity-focused and mostly interim. Ordinary people whose likeness is used to build a persona have far weaker practical protection, and no court has yet ruled finally on a virtual influencer that resembles, rather than copies, a real person.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §7 -->
+<section class="chapter" id="s7" aria-labelledby="s7-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§7</span><span class="ch-part">Part II, the law</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s7-h">Advertising rules and AI labels</h2>
+        <p class="lead">Without a human influencer, liability does not disappear. India, the US and the EU all treat a virtual influencer's post as an endorsement and place responsibility on the brand and the people who control the persona.</p>
+      </header>
+
+      <div class="block">
+        <h3>India</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Instrument</th><th scope="col">What it requires</th><th scope="col">Who answers for it</th></tr></thead>
+            <tbody>
+              <tr><td>ASCI Guidelines for Influencer Advertising (2021, updated 2023), clause 1.4</td><td>A virtual influencer must also disclose, upfront and prominently, that consumers are not interacting with a real human (<a href="https://www.ascionline.in/wp-content/uploads/2023/08/GUIDELINES-FOR-INFLUENCER-ADVERTISING-IN-DIGITAL-MEDIA.pdf">ASCI</a>)</td><td>Influencer and advertiser; the advertiser must ensure compliance</td></tr>
+              <tr><td>Consumer Protection Act 2019, with CCPA Guidelines on Misleading Advertisements and Endorsements (9 June 2022)</td><td>No misleading advertisements or endorsements</td><td>Manufacturers, advertisers and endorsers</td></tr>
+              <tr><td>“Endorsement Know-hows!”, Department of Consumer Affairs (20 Jan 2023)</td><td>Expressly covers virtual influencers; disclosures must be prominent and hard to miss, using terms like “advertisement”, “sponsored” or “paid promotion” (<a href="https://consumeraffairs.nic.in/sites/default/files/PIB1892527.pdf">PIB</a>)</td><td>Penalty up to ₹10 lakh, up to ₹50 lakh for repeat offences (<a href="https://theleaflet.in/?p=48886">The Leaflet</a>); endorsers can be barred from endorsing (s.21)</td></tr>
+              <tr><td>IT (Intermediary Guidelines) Amendment Rules 2026, MeitY</td><td>In force 20 Feb 2026; defines “synthetically generated information” and requires prominent labels (<a href="https://www.businesstoday.in/technology/story/govt-tightens-rules-on-ai-generated-content-mandates-labels-and-faster-takedowns-515505-2026-02-10">Business Today</a>) and provenance metadata that cannot be stripped; text-only content excluded (<a href="https://blog.ipleaders.in/it-rules-2026/">iPleaders</a>)</td><td>Platforms, with user declarations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="aside-note">
+          <h4>India moved first</h4>
+          <p>ASCI's 2021 guidelines made India the first national regulator to address virtual influencers expressly, two years before the US FTC (<a class="cite" href="https://www.infolawgroup.com/insights/2023/8/11/virtual-influencers-are-now-officially-regulated-endorsersunless-theyre-spokespersons">InfoLawGroup</a>). As a persona is not a legal person, the duties fall on the entity that controls its posts (<a class="cite" href="https://www.nishithdesai.com/generateHTML/4713/4">Nishith Desai Associates</a>).</p>
+        </aside>
+      </div>
+
+      <div class="cols-2">
+        <div class="card">
+          <span class="k">United States</span>
+          <h4>FTC Endorsement Guides, 16 CFR Part 255 (2023)</h4>
+          <ul>
+            <li>An endorser is anyone who is or appears to be an individual, group or institution, which covers virtual influencers (<a class="cite" href="https://kirkland.com/publications/kirkland-alert/2023/07/federal-trade-commission-releases-first-updates-to-endorsement-guides-in-14-years">Kirkland &amp; Ellis</a>).</li>
+            <li>Advertisers, endorsers and intermediaries such as ad agencies can all be liable (<a class="cite" href="https://marketinglaw.osborneclarke.com/advertising-regulation/us-ftc-guides-businesses-on-combatting-deceptive-reviews-and-endorsements/">Osborne Clarke</a>).</li>
+            <li>A persona cannot use a product, so it should not claim personal experience of one.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="k">European Union</span>
+          <h4>AI Act, Article 50, in force from 2 Aug 2026</h4>
+          <ul>
+            <li>Deployers must disclose deepfakes, and people must be told when they interact with an AI system.</li>
+            <li>The 2026 Digital Omnibus did not delay this; it only gave generative systems already on the market until 2 Dec 2026 for machine-readable marking (<a class="cite" href="https://www.ropesgray.com/en/insights/viewpoints/2026/08/102nfqm/you-talkin-to-me-operationalising-the-eu-ai-acts-transparency-obligations">Ropes &amp; Gray</a>).</li>
+            <li>A persona that chats with EU followers needs an AI-interaction notice.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Who is liable if AVA promotes a misleading product?</h3>
+        <div class="meter-list">
+          <div class="meter-row"><b>Brand</b><div><div class="meter" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></div><small>High exposure</small></div><p>Primary liability under consumer law; must monitor its endorsers.</p></div>
+          <div class="meter-row"><b>Agency running AVA</b><div><div class="meter" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></div><small>High exposure</small></div><p>Treated as endorser or intermediary: CCPA penalties, FTC liability, ASCI complaints.</p></div>
+          <div class="meter-row"><b>AI platform</b><div><div class="meter" aria-hidden="true"><i class="f"></i><i class="f"></i><i></i><i></i></div><small>Medium exposure</small></div><p>Generally not liable for the advert, but the IT Rules impose labelling and takedown duties.</p></div>
+          <div class="meter-row"><b>Designer</b><div><div class="meter" aria-hidden="true"><i class="f"></i><i></i><i></i><i></i></div><small>Low exposure</small></div><p>Usually no advertising liability unless involved in the claims.</p></div>
+        </div>
+      </div>
+
+      <div class="verdict">
+        <h3>Our assessment</h3>
+        <p>Disclosure rules solve deception, answering “is this real?”, but not ownership. They also add a compliance cost human influencers do not face: a double label, paid partnership plus not a real human.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §8 -->
+<section class="chapter" id="s8" aria-labelledby="s8-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§8</span><span class="ch-part">Part II, the law</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s8-h">Contracts and licensing: how ownership is actually decided</h2>
+        <p class="lead">Where the statute is silent, the real owner of a virtual influencer is whoever the contracts say it is. A well-drafted chain of agreements allocates control, but it cannot create rights the law does not recognise.</p>
+      </header>
+
+      <div class="block">
+        <h3>The contract chain around AVA</h3>
+        <div class="hub">
+          <div class="row1">
+            <div class="ag"><span class="with">With the designer</span><h4>Design agreement</h4><p>Written assignment of copyright in designs, models and future variations; moral-rights undertaking; credit; fee.</p></div>
+            <div class="ag"><span class="with">With in-house staff</span><h4>Employment contract</h4><p>Confirms work is made in the course of employment, so the employer owns it (s.17).</p></div>
+            <div class="ag"><span class="with">With the AI provider</span><h4>Platform terms</h4><p>Who owns outputs; commercial use; whether inputs train the model; indemnities.</p></div>
+          </div>
+          <div class="center"><span class="orb" aria-hidden="true"></span>PixelMint agency holds AVA</div>
+          <div class="row3">
+            <div class="ag"><span class="with">With models and voice actors</span><h4>Likeness release</h4><p>Consent to use face, body or voice; scope; duration; payment; warranty of no imitation.</p></div>
+            <div class="ag"><span class="with">With Threadline</span><h4>Brand licence</h4><p>Licensed use of persona and content; term, territory, media, exclusivity, approvals, ASCI and CCPA compliance.</p></div>
+            <div class="ag"><span class="with">With Instagram, YouTube</span><h4>Account terms</h4><p>Account ownership and access, follower data, and the platform's own licence over posts.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Twelve clauses every persona contract needs</h3>
+        <ul class="clauses">
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Ownership and assignment</b><span>Assign all copyright in writing and signed (s.19); state term and territory, or the defaults of 5 years and India apply.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Future works</b><span>Cover later AI-generated variations; an assignment of a future work takes effect when it exists (s.18).</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Moral rights</b><span>Designers keep attribution and integrity rights (s.57); get an undertaking not to object to changes.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Trademark</b><span>The agency files and owns the name and logo; the designer agrees not to register similar marks.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>AI use and provenance</b><span>List approved tools; log prompts, edits and human input to support authorship claims.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Real-likeness warranty</b><span>Creators warrant the persona copies no real face, voice or mark, and indemnify if it does.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Licence scope for brands</b><span>Campaign-specific, time-limited and territorial; no right to modify or spin off characters.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Morality and reputation</b><span>Both ways: the brand can exit after a scandal; the agency can refuse content that harms the persona.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Compliance</b><span>ASCI clause 1.4, CCPA guidelines and IT Rules labels, and who bears the penalties.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Termination and exit</b><span>Who keeps the character, account, followers and model files when a relationship ends.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Liability and indemnity</b><span>For IP infringement, misleading claims and data breaches, including under the DPDP Act 2023 if real people's photos or voices are used.</span></div></li>
+          <li><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="m7 11.3 2.7 2.6L15 8.5"/></svg><div><b>Disputes</b><span>Governing law, jurisdiction and arbitration, with a carve-out for urgent injunctions.</span></div></li>
+        </ul>
+      </div>
+
+      <aside class="aside-note">
+        <h4>What a contract cannot do</h4>
+        <p>It binds only its parties, so it cannot stop a stranger copying an AI post that has no copyright. A post-termination non-compete on a designer is likely void in India under s.27 of the Indian Contract Act, 1872, so restrict use of the specific persona instead. And platform terms are non-negotiable for most agencies.</p>
+      </aside>
+
+      <div class="block">
+        <h3>Own the persona or license it?</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col"></th><th scope="col">Brand owns the persona outright</th><th scope="col">Brand licenses from an agency</th></tr></thead>
+            <tbody>
+              <tr><td>Control</td><td>Full; the persona becomes a brand asset, like a mascot</td><td>Limited to the licence</td></tr>
+              <tr><td>Cost</td><td>High up-front build plus an ongoing content team</td><td>Pay per campaign</td></tr>
+              <tr><td>Flexibility</td><td>Locked into one persona</td><td>Free to switch personas or agencies</td></tr>
+              <tr><td>Risk</td><td>Brand bears all IP and reputational risk</td><td>Agency carries much of the IP risk through warranties</td></tr>
+              <tr><td>Best for</td><td>Long-term ambassadors central to brand identity</td><td>Campaign-based marketing</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Our answer: licensing suits most brands. Outright ownership makes sense only when the persona is central to the brand's identity and the brand can manage IP in-house.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §9 -->
+<section class="chapter" id="s9" aria-labelledby="s9-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§9</span><span class="ch-part">Part III, evidence</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s9-h">Critical analysis: controversies and gaps</h2>
+        <p class="lead">Existing law answers the easy cases: copying a celebrity, copying a registered name, undisclosed adverts. It leaves the hard ones open: who owns AI-generated content, who owns a persona built by many hands, and who answers for the harm a persona causes.</p>
+      </header>
+
+      <div class="block">
+        <h3>Five legal controversies</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Issue</th><th scope="col">The question</th><th scope="col">What the law says now</th><th scope="col">The gap</th></tr></thead>
+            <tbody>
+              <tr><td>Ownership disputes</td><td>An agency hires a designer; who owns the character?</td><td>Employee work goes to the employer; freelance work stays with the designer unless assigned in writing (s.17, s.19)</td><td>Many agencies rely on invoices or emails, not signed assignments</td></tr>
+              <tr><td>Celebrity imitation</td><td>Can AVA use a star's face, voice or mannerisms?</td><td>No: the Anil Kapoor, Jackie Shroff, Arijit Singh and Aishwarya Rai orders</td><td>Where “inspired by” ends and imitation begins is unclear; non-celebrities have weak practical remedies</td></tr>
+              <tr><td>Brand infringement</td><td>AVA resembles an existing mascot</td><td>Trademark infringement or passing off; copyright if the design is copied</td><td>Generative AI can reproduce protected elements without anyone intending it</td></tr>
+              <tr><td>AI endorsements</td><td>AVA promotes a misleading product</td><td>The brand and the controlling agency are liable (CCPA, ASCI, FTC)</td><td>No rule yet for a persona chatting with followers autonomously in real time</td></tr>
+              <tr><td>Content ownership</td><td>Can AVA's posts be copyrighted and licensed?</td><td>India: the person who “causes” them (s.2(d)(vi)); US: only with real human authorship</td><td>DPIIT Part 2 on outputs is unpublished; no Indian court ruling</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>What real incidents teach</h3>
+        <div class="incidents">
+          <article class="incident"><span class="y">2018</span><h4>Shudu</h4><p>A dark-skinned “digital supermodel” made by a white British photographer was reposted by Fenty Beauty; critics called it digital blackface (<a class="cite" href="https://dailydot.com/?p=378139">Daily Dot</a>).</p><p class="lesson">Lawful identity appropriation can still damage a brand.</p></article>
+          <article class="incident"><span class="y">2019</span><h4>Lil Miquela and Calvin Klein</h4><p>An advert showing Bella Hadid kissing Miquela drew queerbaiting accusations, and Calvin Klein apologised (<a class="cite" href="https://bd.fashionnetwork.com/news/Calvin-Klein-issues-apology-after-new-ad-sparks-queerbaiting-accusations,1102047.html">Fashion Network</a>).</p><p class="lesson">The brand, not the persona, carries the backlash.</p></article>
+          <article class="incident"><span class="y">2019</span><h4>Lil Miquela's vlog</h4><p>A vlog in which the character described a sexual assault was criticised for fictionalising real trauma (<a class="cite" href="https://www.papermag.com/lil-miquela-sexual-assault-vlog">PAPER</a>).</p><p class="lesson">A fictional persona making personal claims risks deception.</p></article>
+          <article class="incident"><span class="y">2022</span><h4>FN Meka</h4><p>Capitol Records signed the AI rapper on 14 August and dropped it within two weeks over racial stereotypes (<a class="cite" href="https://www.bet.com/article/i75dt5/capitol-records-drops-fn-meka-n-word-ai-rapper">BET</a>).</p><p class="lesson">Check who creates and voices a persona before signing it.</p></article>
+          <article class="incident"><span class="y">2023</span><h4>Aitana López</h4><p>Commercially successful, but critics said she promotes unrealistic beauty standards (<a class="cite" href="https://www.entrepreneur.com/business-news/this-ai-fitness-model-makes-11000-a-month/465975">Entrepreneur</a>).</p><p class="lesson">Social scrutiny follows commercial scale.</p></article>
+          <article class="incident"><span class="y">2025</span><h4>Tilly Norwood</h4><p>SAG-AFTRA said the AI “actress” was generated by a program trained on countless performers' work without permission or compensation (<a class="cite" href="https://www.npr.org/2025/09/30/nx-s1-5558119/tily-norwood-ai-hollywood">NPR</a>).</p><p class="lesson">Job displacement and training consent are now mainstream objections.</p></article>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Our five arguments</h3>
+        <ol class="args">
+          <li><div><b>Owning creative work and owning an identity are different things.</b><span>Copyright and trademark tell us who owns AVA; personality rights tell us whose identity AVA must not take.</span></div></li>
+          <li><div><b>Many contributors create overlapping claims.</b><span>Designer, prompt team, agency, platform and real-life reference people can each claim part of one persona.</span></div></li>
+          <li><div><b>Existing law is adequate for some disputes, not all.</b><span>Courts handle celebrity imitation well; the law is unsettled on AI-output authorship and multi-party creation.</span></div></li>
+          <li><div><b>Control comes with risk.</b><span>Brands choose personas to avoid human unpredictability, yet every incident above shows they inherit legal, reputational and ethical risk instead.</span></div></li>
+          <li><div><b>No human influencer does not mean no responsibility.</b><span>ASCI, CCPA, the FTC and the EU AI Act all place liability on the people behind the persona.</span></div></li>
+        </ol>
+      </div>
+
+      <div class="versus">
+        <div>
+          <h4>The counter-view</h4>
+          <ul>
+            <li>The US Copyright Office concluded existing law can resolve AI copyrightability without new legislation (<a class="cite" href="https://www.akingump.com/en/insights/ai-law-and-regulation-tracker/us-copyright-office-releases-part-2-of-ai-report">Akin Gump</a>).</li>
+            <li>India's government told the Rajya Sabha in February 2024 that the existing framework is adequate, and the 2026 DABUS order read s.2(d)(vi) as sufficient (<a class="cite" href="https://www.intepat.com/blog/dabus-copyright-order-india-ai-authorship">Intepat</a>).</li>
+            <li>On this view, contracts plus existing law are enough, and new laws risk chilling innovation.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Our assessment</h4>
+          <p>The law is adequate for disputes between parties who signed contracts. It is inadequate for third parties, meaning copiers, imitated individuals and consumers, and for content with no clear human author.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §10 -->
+<section class="chapter dark" id="cases" aria-labelledby="s10-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§10</span><span class="ch-part">Part III, evidence</span></div>
+    <div class="ch-main">
+      <header>
+        <span class="casefile">Case study 1 of 2</span>
+        <h2 id="s10-h">Lil Miquela: a fictional personality as a company asset</h2>
+        <p class="lead">Lil Miquela was built, valued, trademarked, signed by a talent agency and sold with her parent company. Ownership passed by corporate acquisition, with no human identity involved at any point.</p>
+        <div class="docket"><span>Created 2016 by Brud, Los Angeles</span><span>Acquired by Dapper Labs, Oct 2021</span><span>US Reg. Nos. 7224981, 7316489</span></div>
+      </header>
+
+      <div class="block">
+        <h3>Timeline</h3>
+        <ol class="vtl">
+          <li><span class="when">2016</span><span class="dot" aria-hidden="true"></span><div class="what"><b>Launch</b><p>Launched on Instagram by Brud, co-founded by Trevor McFedries and Sara DeCou (<a class="cite" href="https://everything-pr.com/ai-influencers-lil-miquela-aitana-lopez-virtual-brand-ambassadors">Everything-PR</a>).</p></div></li>
+          <li><span class="when">Feb 2018</span><span class="dot" aria-hidden="true"></span><div class="what"><b>Prada at Milan Fashion Week</b><p>An Instagram takeover for Prada; in June TIME names her among the 25 most influential people on the internet (<a class="cite" href="https://time.com/5324130/most-influential-internet/">TIME</a>).</p></div></li>
+          <li><span class="when">2019</span><span class="dot" aria-hidden="true"></span><div class="what"><b>Calvin Klein and Samsung</b><p>Major campaigns, the Calvin Klein backlash and apology, and a US trademark application for MIQUELA.</p></div></li>
+          <li><span class="when">2020</span><span class="dot" aria-hidden="true"></span><div class="what"><b>Signed by CAA</b><p>The talent agency represents her like any human star (<a class="cite" href="https://tubefilter.com/2020/05/08/caa-miquela-ai-robot-instagram-influencer-brud/">Tubefilter</a>).</p></div></li>
+          <li><span class="when">Oct 2021</span><span class="dot" aria-hidden="true"></span><div class="what"><b>Sold with Brud</b><p>Dapper Labs acquires Brud in an undisclosed, equity-based deal; Brud had reached a USD 125 million valuation (<a class="cite" href="https://techcrunch.com/2021/10/04/nft-startup-dapper-labs-acquires-virtual-influencer-startup-brud">TechCrunch</a>).</p></div></li>
+          <li><span class="when">2023–24</span><span class="dot" aria-hidden="true"></span><div class="what"><b>Trademarks registered</b><p>MIQUELA US registrations issue in November 2023 and February 2024, still in Brud, Inc.'s name.</p></div></li>
+          <li><span class="when">2025</span><span class="dot" aria-hidden="true"></span><div class="what"><b>Run by a Dapper Labs team</b><p>One estimate puts her fee near USD 73,920 per post (<a class="cite" href="https://www.thestar.com.my/tech/tech-news/2025/09/04/theyre-famous-theyre-everywhere-and-theyre-fake">The Star</a>). Digiday reports nearly 2.5 million Instagram followers, low engagement and falling numbers, while brand interest in virtual influencers fell nearly 30% from 2024 to 2025 (<a class="cite" href="https://digiday.com/media/in-graphic-detail-virtual-influencers-click-with-young-audiences-yet-brands-interest-wanes/">Digiday</a>).</p></div></li>
+        </ol>
+      </div>
+
+      <div class="cols-2">
+        <div class="card"><span class="k">Creation</span><h4>Brud's team built everything</h4><p>Designers, writers and producers created the character, her storyline and her content.</p></div>
+        <div class="card"><span class="k">Transfer</span><h4>Buying Brud meant buying Miquela</h4><p>Copyright, trademarks, accounts and goodwill moved as company assets. No consent from “her” was needed: she has no legal personality.</p></div>
+        <div class="card"><span class="k">Representation</span><h4>A talent agent with a company as principal</h4><p>CAA negotiated deals as for human talent, but the client was the owning company.</p></div>
+        <div class="card"><span class="k">Community control</span><h4>An experiment that raises new questions</h4><p>After the acquisition, Dapper said it would open Miquela's storyline to her community through decentralised structures (<a class="cite" href="https://dot.la/tag/dapper-collective">dot.LA</a>), which raises the question of who owns fan-created storylines.</p></div>
+      </div>
+
+      <div class="block">
+        <h3>IP layers in one persona</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Layer</th><th scope="col">How it applies to Miquela</th></tr></thead>
+            <tbody>
+              <tr><td>Copyright</td><td>In her design, images, videos and music, owned by Brud and now Dapper through employment and contracts; internal details are not public</td></tr>
+              <tr><td>Trademark</td><td>MIQUELA registered for clothing, advertising and entertainment services, and Class 9 goods</td></tr>
+              <tr><td>Licensing</td><td>Each campaign, from Prada to Samsung, licenses persona and content for a defined use</td></tr>
+              <tr><td>Personality rights</td><td>None for Miquela herself; relevant only if her look or voice copied a real person</td></tr>
+              <tr><td>Advertising law</td><td>Her posts are endorsements; she uses partnership tags such as #LiquidIVPartner (<a href="https://sproutsocial.com/insights/virtual-influencers/">Sprout Social</a>)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="verdict">
+        <h3>What the case shows</h3>
+        <p>A persona can hold brand value on its own, but its rights can sit in different hands; here one company held them all, which is why the sale worked. The brand carried the Calvin Klein backlash, and falling engagement shows value depends on continuing investment, not legal ownership alone. Brud's internal contracts are not public, so we do not claim to know who owns what inside the company.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §11 -->
+<section class="chapter dark" id="s11" aria-labelledby="s11-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§11</span><span class="ch-part">Part III, evidence</span></div>
+    <div class="ch-main">
+      <header>
+        <span class="casefile">Case study 2 of 2</span>
+        <h2 id="s11-h"><i style="font-family:var(--body);font-weight:500">Anil Kapoor v. Simply Life India</i>, Delhi High Court, 2023</h2>
+        <p class="lead">This order marks the boundary for virtual influencers in India. Building an original persona is lawful; building one from a real person's face, voice or catchphrase without consent can be stopped at once.</p>
+        <div class="docket"><span>CS(COMM) 652/2023</span><span>Interim order, 20 Sept 2023</span><span>Permanent decree, 30 Apr 2024</span></div>
+      </header>
+
+      <div class="catch">
+        <q lang="mr">Jhakaas</q>
+        <p>Kapoor first used the catchphrase in the 1985 film <i>Yudh</i>. The court treated it as exclusively associated with him and protected it alongside his name, voice and image (<a class="cite" href="https://telanganatoday.com/delhi-hc-restrains-misuse-of-personality-attributes-of-actor-anil-kapoor">Telangana Today</a>).</p>
+      </div>
+
+      <dl class="facts">
+        <div><dt>Court</dt><dd>Delhi High Court, Justice Prathiba M. Singh (<a href="https://future.indiankanoon.org/doc/113724486/">Indian Kanoon</a>)</dd></div>
+        <div><dt>Trigger</dt><dd>YouTube shorts with AI deepfakes superimposing his face on other actors (<a href="https://filminformation.com/featured/court-gives-anil-kapoor-relief-in-form-of-restraint-order-against-misuse-of-his-name-voice-other-attributes-of-persona-21-september-2023/">Film Information</a>)</dd></div>
+        <div><dt>Misuse alleged</dt><dd>His name, initials, nicknames such as “Mr. India” and “Majnu Bhai”, voice and images used for commercial gain (<a href="https://www.livelaw.in/top-stories/delhi-high-court-anil-kapoor-voice-image-misuse-personality-rights-238217">LiveLaw</a>)</dd></div>
+        <div><dt>Defendants</dt><dd>Multiple entities including Simply Life India, Vision Computers and Giphy, plus unknown persons</dd></div>
+        <div><dt>Interim relief</dt><dd>Ex parte injunction barring AI tools used to morph his image, make GIFs or produce deepfakes for monetary gain (<a href="https://thestar.com.my/aseanplus/aseanplus-news/2023/09/22/bollywood-stalwart-anil-kapoor-wins-legal-battle-to-protect-personality-rights-from-ai-misuse">The Star</a>)</dd></div>
+        <div><dt>Final outcome</dt><dd>On 30 April 2024 Justice Sanjeev Narula granted a permanent injunction; Kapoor waived damages and costs (<a href="https://future.indiankanoon.org/doc/196354913/">Indian Kanoon</a>)</dd></div>
+      </dl>
+
+      <div class="block">
+        <h3>The court's reasoning</h3>
+        <ul class="bullets">
+          <li>Free speech is protected, but using it becomes illegal when it crosses the line and harms personality rights (<a class="cite" href="https://www.storyboard18.com/amp/how-it-works/delhi-high-court-passes-order-to-protect-anil-kapoor-from-unauthorised-use-of-his-name-image-and-persona-14378.htm">Storyboard18</a>).</li>
+          <li>The court said it could not turn a blind eye to commercial misuse of a personality.</li>
+          <li>Endorsements are a celebrity's livelihood, and unlawful use destroys that right; commentators read the order through the right to livelihood (<a class="cite" href="https://groups.google.com/g/spicyip/c/hkPvS8mVnTc">SpicyIP</a>).</li>
+          <li>The court recognised that generative AI and machine learning enable misuse of a persona online.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Compared with the cases that followed</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col"></th><th scope="col">Anil Kapoor, 2023</th><th scope="col">Jackie Shroff, 2024</th><th scope="col">Arijit Singh, 2024</th></tr></thead>
+            <tbody>
+              <tr><td>Court</td><td>Delhi HC</td><td>Delhi HC, Justice Sanjeev Narula, 15 May</td><td>Bombay HC, Justice R.I. Chagla, 26 July</td></tr>
+              <tr><td>AI angle</td><td>Deepfakes, morphing, GIFs</td><td>An unlicensed AI chatbot using his persona</td><td>Voice-cloning tools converting any voice into his</td></tr>
+              <tr><td>Extra basis</td><td>Catchphrase “Jhakaas”</td><td>Registered BHIDU marks in Classes 25 and 41</td><td>Protected even though he had avoided endorsements (<a href="https://www.deccanherald.com/india/maharashtra/bombay-high-court-gives-relief-to-arijit-singh-says-ai-tools-mimicking-his-voice-violate-personality-rights-3130793">Deccan Herald</a>)</td></tr>
+              <tr><td>Outcome</td><td>Interim 2023, permanent decree 2024</td><td>Ex parte interim injunction</td><td>Ad-interim injunction</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="verdict">
+        <h3>What it means for virtual influencers</h3>
+        <p>A persona must not be built from a real person's identity without a licence, including voice, catchphrases and mannerisms. Courts act fast and ex parte, and platforms can be ordered to take content down overnight. The case concerns a real person's rights, not ownership of a fictional character: it defines what a virtual influencer must avoid, not who owns one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §12 -->
+<section class="chapter" id="business" aria-labelledby="s12-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§12</span><span class="ch-part">Part IV, implications</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s12-h">What this means for business</h2>
+        <p class="lead">A virtual influencer is an IP portfolio to be managed, not a free substitute for human talent. Its value depends on clean ownership, and the risk sits with whoever pays for and controls the persona.</p>
+      </header>
+
+      <div class="cols-2">
+        <div class="card"><span class="k">India</span><h4 class="num">₹1,275 crore to ₹2,800 crore</h4><p>India's influencer market in 2022, and its projected size by 2027, according to the Department of Consumer Affairs (<a class="cite" href="https://inc42.com/buzz/govt-directs-influencers-to-put-clear-disclaimers-in-endorsements/amp">Inc42</a>).</p></div>
+        <div class="card"><span class="k">Worldwide</span><h4 class="num">Nearly 30% less brand interest</h4><p>Brand interest in virtual influencers fell from 2024 to 2025 even as forecasts stayed bullish (<a class="cite" href="https://digiday.com/media/in-graphic-detail-virtual-influencers-click-with-young-audiences-yet-brands-interest-wanes/">Digiday</a>). Treat growth projections with caution.</p></div>
+      </div>
+
+      <div class="block">
+        <h3>What each stakeholder should do</h3>
+        <div class="tabs" data-tabs>
+          <div class="tablist" role="tablist" aria-label="Stakeholder">
+            <button role="tab" id="t-br" aria-controls="p-br" aria-selected="true">Brands</button>
+            <button role="tab" id="t-ag" aria-controls="p-ag" aria-selected="false" tabindex="-1">Agencies</button>
+            <button role="tab" id="t-de" aria-controls="p-de" aria-selected="false" tabindex="-1">Designers</button>
+            <button role="tab" id="t-pl" aria-controls="p-pl" aria-selected="false" tabindex="-1">AI platforms</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-br" aria-labelledby="t-br">
+            <div><h4>Clear the rights before the campaign</h4><ul class="bullets"><li>Verify who owns the persona's design, name, content and accounts.</li><li>Get written rights for each campaign, medium, territory and term.</li><li>Use the double disclosure required by ASCI, CCPA and the IT Rules.</li><li>Avoid personal-experience claims a persona cannot truthfully make.</li><li>Prepare exit, morality and crisis clauses.</li></ul></div>
+            <div class="auth"><b>Why</b><span>Brands carry primary consumer-law liability, and the backlash in every incident in §9 landed on the brand.</span></div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-ag" aria-labelledby="t-ag" hidden>
+            <div><h4>Hold every right in the company's name</h4><ul class="bullets"><li>Get signed assignments from every freelancer, and file trademarks early.</li><li>Keep provenance records of human input and the AI tools used.</li><li>Screen designs and voices against real people and existing marks.</li><li>Hold the account, follower data and model files in the company's name.</li><li>Build labels, metadata and approvals into the content workflow.</li></ul></div>
+            <div class="auth"><b>Why</b><span>Lil Miquela could be sold with Brud because one company held all the rights.</span></div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-de" aria-labelledby="t-de" hidden>
+            <div><h4>Negotiate before handing over the files</h4><ul class="bullets"><li>Choose assignment or licence, and price each accordingly.</li><li>Agree credit, and royalties on future variations.</li><li>Keep the right to show the work in a portfolio.</li><li>Know that moral rights survive assignment but are hard to enforce.</li></ul></div>
+            <div class="auth"><b>Why</b><span>Without a signed assignment a freelance designer keeps copyright (s.17, s.19), which is a strong bargaining position.</span></div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-pl" aria-labelledby="t-pl" hidden>
+            <div><h4>Make terms and takedowns clear</h4><ul class="bullets"><li>State plainly who owns outputs and whether commercial use is allowed.</li><li>Run complaint and takedown processes for likeness and IP claims.</li><li>Build safeguards against cloning real voices and faces.</li></ul></div>
+            <div class="auth"><b>Why</b><span>The IT Rules 2026 and court orders since 2023 put platforms in the chain of responsibility.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>A proposed allocation of rights</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Stakeholder</th><th scope="col">Should hold</th><th scope="col">Should bear</th></tr></thead>
+            <tbody>
+              <tr><td>Character designer</td><td>Credit, fee and agreed portfolio use</td><td>A warranty of originality</td></tr>
+              <tr><td>Agency</td><td>Copyright by assignment, trademarks, accounts, data, goodwill</td><td>IP clearance, disclosure compliance, content risk</td></tr>
+              <tr><td>AI platform</td><td>Rights in its model, and rights set by its terms</td><td>Takedown duties and safeguards against misuse</td></tr>
+              <tr><td>Brand</td><td>A campaign-limited licence</td><td>Advertising liability for claims, and monitoring</td></tr>
+              <tr><td>Real person imitated</td><td>Full control of their own identity, and licence fees if used</td><td>Nothing</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">This is our proposed contractual model, not what the law assigns automatically.</p>
+      </div>
+
+      <div class="block">
+        <h3>Risk map for a persona launch</h3>
+        <div class="matrix-wrap">
+          <div>
+            <div class="matrix" role="img" aria-label="Risk matrix placing six risks by likelihood and impact">
+              <div class="ylab">High impact</div><div class="cell"></div><div class="cell hot"><span class="dotn">1</span><span class="dotn">2</span><span class="dotn">5</span></div><div class="cell hot"></div>
+              <div class="ylab">Medium</div><div class="cell"></div><div class="cell warm"><span class="dotn">3</span></div><div class="cell hot"><span class="dotn">4</span></div>
+              <div class="ylab">Low</div><div class="cell"></div><div class="cell"><span class="dotn">6</span></div><div class="cell warm"></div>
+              <div></div><div class="xlab">Low</div><div class="xlab">Medium likelihood</div><div class="xlab">High</div>
+            </div>
+            <p class="axis-cap">Likelihood runs left to right, impact bottom to top.</p>
+          </div>
+          <ol class="risk-list">
+            <li><span class="dotn">1</span><div><b>Designer disputes ownership</b><span>Signed assignment covering future variations.</span></div></li>
+            <li><span class="dotn">2</span><div><b>Persona resembles a celebrity</b><span>Likeness screening and legal review before launch.</span></div></li>
+            <li><span class="dotn">3</span><div><b>AI output copies third-party IP</b><span>Human review, licensed models, indemnities.</span></div></li>
+            <li><span class="dotn">4</span><div><b>Undisclosed synthetic endorsement</b><span>Standard labels and an ASCI pre-check.</span></div></li>
+            <li><span class="dotn">5</span><div><b>Reputational backlash</b><span>Diverse creative teams and an ethics review.</span></div></li>
+            <li><span class="dotn">6</span><div><b>Competitor copies AI posts</b><span>Trademark the persona; rely on design copyright.</span></div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>The framework applied to AVA</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Question</th><th scope="col">Answer under this framework</th></tr></thead>
+            <tbody>
+              <tr><td>Who owns AVA's design?</td><td>PixelMint, if Riya signed a written assignment; otherwise Riya</td></tr>
+              <tr><td>Can PixelMint register “AVA”?</td><td>Yes, if it is distinctive and not confusingly similar to an existing mark</td></tr>
+              <tr><td>Who owns AVA's AI-generated posts?</td><td>In India, arguably PixelMint as the person who causes them; in the US, only the human-authored parts</td></tr>
+              <tr><td>Can Threadline keep using AVA after the campaign?</td><td>Only within the licence term</td></tr>
+              <tr><td>Who is liable if AVA makes a false claim?</td><td>Threadline and PixelMint</td></tr>
+              <tr><td>What if AVA sounds like a celebrity?</td><td>The celebrity can get an injunction; PixelMint must re-voice AVA or obtain a licence</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §13 -->
+<section class="chapter" id="sdgs" aria-labelledby="s13-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§13</span><span class="ch-part">Part IV, implications</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s13-h">Is it a ripple effect on the SDGs?</h2>
+        <p class="lead">Yes. Unclear IP rules for AI personas spread outward from a single contract dispute to jobs, innovation, consumer trust and the justice system, touching SDGs 8, 9, 12 and 16 in both directions.</p>
+      </header>
+
+      <div class="ripple-wrap">
+        <figure class="ripple" aria-label="Ripple diagram: from an AI persona at the centre outward to the SDGs">
+          <svg viewBox="0 0 420 420" role="img" aria-labelledby="ripple-t">
+            <title id="ripple-t">Five rings from AI persona, to unclear law, to business risk, to people affected, to SDGs 8, 9, 12 and 16</title>
+            <circle cx="210" cy="210" r="200" fill="#fdebe3"/>
+            <circle cx="210" cy="210" r="160" fill="#fbd6c7"/>
+            <circle cx="210" cy="210" r="120" fill="#f8b9a2"/>
+            <circle cx="210" cy="210" r="80" fill="#f3906f"/>
+            <circle cx="210" cy="210" r="42" fill="#ee5236"/>
+            <text x="210" y="35" text-anchor="middle" font-size="14" fill="#24141f">5  The SDGs</text>
+            <text x="210" y="75" text-anchor="middle" font-size="14" fill="#24141f">4  People affected</text>
+            <text x="210" y="115" text-anchor="middle" font-size="14" fill="#24141f">3  Business risk</text>
+            <text x="210" y="154" text-anchor="middle" font-size="13.5" fill="#fff">2  Law unclear</text>
+            <text x="210" y="206" text-anchor="middle" font-size="14" fill="#fff">1  AI</text>
+            <text x="210" y="224" text-anchor="middle" font-size="14" fill="#fff">persona</text>
+            <g font-size="13" font-weight="700" fill="#fff" text-anchor="middle">
+              <circle cx="357" cy="313" r="18" fill="#A21942"/><text x="357" y="318">8</text>
+              <circle cx="257" cy="384" r="18" fill="#FD6925"/><text x="257" y="389">9</text>
+              <circle cx="163" cy="384" r="18" fill="#BF8B2E"/><text x="163" y="389">12</text>
+              <circle cx="63" cy="313" r="18" fill="#00689D"/><text x="63" y="318">16</text>
+            </g>
+          </svg>
+        </figure>
+        <ol class="chain">
+          <li>AI makes it cheap to create a persona with many contributors.</li>
+          <li>IP law gives incomplete answers on authorship and ownership.</li>
+          <li>Businesses face disputes, liability and uncertain asset value.</li>
+          <li>Consumers meet synthetic endorsements; real people face identity misuse; human creators face new competition.</li>
+          <li>The effects reach growth, innovation, responsible markets and institutions: SDGs 8, 9, 12 and 16.</li>
+        </ol>
+      </div>
+
+      <div class="sdgs">
+        <article class="sdg">
+          <div class="sdg-top" style="background:#A21942"><span class="n">8</span><div><b>Decent work and economic growth</b><span>Targets 8.2, 8.3, 8.5</span></div></div>
+          <div class="sdg-body">
+            <p class="t">Productivity through technology and innovation; policies that support entrepreneurship, creativity and small firms; decent work for all (<a class="cite" href="https://sdgs.un.org/goals/goal8">UN</a>).</p>
+            <div class="pm"><div class="p"><b>Positive ripple</b>New agencies and jobs for 3D artists, prompt designers and IP lawyers; small brands can afford influencer marketing.</div><div class="m"><b>Negative ripple</b>Displacement of human models and performers; 62% of creators worry about competition.</div></div>
+            <p class="q">Growth, or displacement of human creative work?</p>
+          </div>
+        </article>
+        <article class="sdg">
+          <div class="sdg-top" style="background:#FD6925"><span class="n">9</span><div><b>Industry, innovation and infrastructure</b><span>Targets 9.5, 9.b</span></div></div>
+          <div class="sdg-body">
+            <p class="t">Stronger research and technological capability, especially in developing countries; domestic technology development with a supportive policy environment (<a class="cite" href="https://sdgs.un.org/goals/goal9">UN</a>).</p>
+            <div class="pm"><div class="p"><b>Positive ripple</b>Clear IP lets Indian start-ups build and earn from personas such as Kyra and Naina.</div><div class="m"><b>Negative ripple</b>Unclear ownership of AI output deters investment; DPIIT Part 2 is still pending.</div></div>
+            <p class="q">How can India encourage AI innovation while protecting creators?</p>
+          </div>
+        </article>
+        <article class="sdg">
+          <div class="sdg-top" style="background:#BF8B2E"><span class="n">12</span><div><b>Responsible consumption and production</b><span>Targets 12.6, 12.8</span></div></div>
+          <div class="sdg-body">
+            <p class="t">Companies adopt sustainable practices and report on them; people everywhere have the information to make informed choices (<a class="cite" href="https://sdgs.un.org/goals/goal12">UN</a>).</p>
+            <div class="pm"><div class="p"><b>Positive ripple</b>ASCI's not-a-real-human rule and IT Rules labels support informed choice.</div><div class="m"><b>Negative ripple</b>About 40% of young consumers cannot tell CGI influencers from real ones; unrealistic beauty standards.</div></div>
+            <p class="q">Should AI personas always be disclosed, and is disclosure enough?</p>
+          </div>
+        </article>
+        <article class="sdg">
+          <div class="sdg-top" style="background:#00689D"><span class="n">16</span><div><b>Peace, justice and strong institutions</b><span>Targets 16.3, 16.6, 16.10</span></div></div>
+          <div class="sdg-body">
+            <p class="t">Rule of law and equal access to justice; effective, accountable and transparent institutions; access to information and fundamental freedoms (<a class="cite" href="https://sdgs.un.org/goals/goal16">UN</a>).</p>
+            <div class="pm"><div class="p"><b>Positive ripple</b>Courts protect identity from AI misuse within days; new labelling rules are in force.</div><div class="m"><b>Negative ripple</b>Protection is celebrity-focused and interim; ordinary people lack practical access.</div></div>
+            <p class="q">Are institutions equipped to protect everyone, not just celebrities?</p>
+          </div>
+        </article>
+      </div>
+
+      <aside class="aside-note">
+        <h4>A secondary link: SDG 5, gender equality</h4>
+        <p>Most leading virtual influencers are young, female-coded and idealised, from Miquela and Imma to Aitana, Kyra and Naina, which raises concerns about beauty standards and objectification.</p>
+      </aside>
+
+      <div class="verdict">
+        <h3>The SDG verdict</h3>
+        <p>Virtual influencers can advance innovation and growth (SDGs 8 and 9), but only sustainably if ownership is clear, disclosure is honest (SDG 12) and institutions protect everyone's identity, not only celebrities' (SDG 16). The ripple is real, and governance sets its direction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §14 -->
+<section class="chapter" id="s14" aria-labelledby="s14-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§14</span><span class="ch-part">Part IV, implications</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s14-h">Recommendations</h2>
+        <p class="lead">India needs targeted clarification, not a new IP right for personas: settle who “causes” an AI output, codify personality rights for everyone, and make disclosure and provenance standard practice.</p>
+      </header>
+
+      <div class="block">
+        <h3>Legal and policy reforms</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Recommendation</th><th scope="col">Why</th><th scope="col">Who should act</th></tr></thead>
+            <tbody>
+              <tr><td>Clarify s.2(d)(vi): who causes a work when several parties contribute, with a minimum human-contribution test</td><td>Closes the central ownership gap and builds on the 2026 DABUS order</td><td>DPIIT (Working Paper Part 2); Parliament</td></tr>
+              <tr><td>Codify personality rights for everyone, covering voice and digital replicas, with free-speech exceptions</td><td>Moves beyond celebrity-only, interim court orders</td><td>Parliament; MeitY</td></tr>
+              <tr><td>Fast, low-cost takedown for ordinary people whose likeness is misused</td><td>Equal access to justice (SDG 16.3)</td><td>MeitY; platforms under the IT Rules</td></tr>
+              <tr><td>One “AI persona” label aligned across ASCI, CCPA and the IT Rules</td><td>Reduces confusion and compliance cost</td><td>Department of Consumer Affairs; ASCI; MeitY</td></tr>
+              <tr><td>International cooperation on deepfake and digital-replica rules</td><td>Personas cross borders instantly</td><td>WIPO; bilateral IP dialogues</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="cols-3">
+        <div class="card"><span class="k">Contracts</span><h4>Paper the persona</h4><ul><li>Signed assignment covering future AI variations (s.18–19)</li><li>Clear ownership of AI output and licence terms</li><li>Real-likeness warranties and indemnities</li><li>Exit terms for accounts, followers and files</li></ul></div>
+        <div class="card"><span class="k">Marketing</span><h4>Label honestly</h4><ul><li>“Virtual influencer, not a real person”, plus “paid partnership”</li><li>No invented personal-experience testimonials</li><li>Human sign-off on every promotional claim</li><li>Care with health, money and trauma topics</li></ul></div>
+        <div class="card"><span class="k">Governance</span><h4>Audit before launch</h4><ul><li>IP audit of design, name, voice and training data</li><li>Provenance log of prompts, tools and edits</li><li>Ethics review of representation and beauty norms</li><li>Complaint, takedown and crisis procedures</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §15 -->
+<section class="chapter" id="s15" aria-labelledby="s15-h">
+  <div class="wrap ch">
+    <div class="ch-rail"><span class="ch-num">§15</span><span class="ch-part">Part IV, implications</span></div>
+    <div class="ch-main">
+      <header>
+        <h2 id="s15-h">Conclusion: who owns a digital persona?</h2>
+      </header>
+      <p class="closing">No one, by default. <span class="soft">Its design, name, content and commercial identity are separate rights spread across several parties, and in practice whoever holds the contracts and the trademark controls it.</span></p>
+      <div class="findings4">
+        <div class="card"><span class="k">Finding 1</span><h4>A bundle, not an image</h4><p>Copyright in design and content, trademark in name and look, and contractual control of accounts and deals.</p></div>
+        <div class="card"><span class="k">Finding 2</span><h4>Ownership is distributed</h4><p>Designers, agencies, platforms, brands and real-life reference people can each hold a part. Lil Miquela shows the bundle can be consolidated and sold.</p></div>
+        <div class="card"><span class="k">Finding 3</span><h4>The law is half ready</h4><p>Indian courts protect real identities quickly, and the Copyright Office confirmed in 2026 that an AI cannot be an author. Multi-party ownership of AI content remains unresolved.</p></div>
+        <div class="card"><span class="k">Finding 4</span><h4>Responsibility stays with people</h4><p>ASCI, CCPA, the IT Rules 2026, the FTC and the EU AI Act all hold the humans behind the persona liable.</p></div>
+      </div>
+      <div class="verdict">
+        <h3>Final argument</h3>
+        <p>The future of virtual-influencer marketing depends on clear ownership, licensing and accountability as much as on better technology. Until the law catches up, contracts and transparency are what turn an influencer who doesn't exist into an asset someone can legitimately own.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Activities -->
+<section class="activities" id="activities" aria-labelledby="act-h">
+  <div class="wrap">
+    <div class="act-head">
+      <h2 id="act-h">Your turn to rule</h2>
+      <p>Two activities for the class. Run the live vote on our Instagram story or in Mentimeter, then reveal the model answers here.</p>
+    </div>
+
+    <article class="act" aria-labelledby="a1-h">
+      <div class="act-title"><h3 id="a1-h">Who owns AVA?</h3><span>Activity 1, ownership dispute</span></div>
+      <div class="scenario">
+        <div class="scene">
+          <h4>The facts</h4>
+          <ol>
+            <li>PixelMint, a Mumbai agency, pays freelance designer Riya to create AVA. Riya is paid by invoice; nothing is signed.</li>
+            <li>PixelMint makes AVA's posts with a commercial AI image tool.</li>
+            <li>PixelMint registers the trademark “AVA” in Classes 25, 35 and 41.</li>
+            <li>Fashion brand Threadline licenses AVA for a six-month campaign.</li>
+            <li>Six months later, Riya leaves and says she owns AVA.</li>
+          </ol>
+        </div>
+        <div class="polls" id="polls">
+          <div class="poll">
+            <h4>1. Who owns AVA's original design?</h4>
+            <div class="opts"><button type="button" class="opt right" aria-pressed="false">Riya, the designer</button><button type="button" class="opt wrong" aria-pressed="false">PixelMint, the agency</button><button type="button" class="opt wrong" aria-pressed="false">Threadline, the brand</button><button type="button" class="opt wrong" aria-pressed="false">The AI platform</button></div>
+            <p class="answer"><b>Riya.</b> A freelancer keeps copyright unless she assigns it in writing and signs (s.17, s.19). Payment alone is not enough.</p>
+          </div>
+          <div class="poll">
+            <h4>2. Who owns AVA's AI-generated posts?</h4>
+            <div class="opts"><button type="button" class="opt right" aria-pressed="false">Arguably PixelMint, in India</button><button type="button" class="opt wrong" aria-pressed="false">The AI platform</button><button type="button" class="opt wrong" aria-pressed="false">Riya</button><button type="button" class="opt wrong" aria-pressed="false">Nobody, anywhere</button></div>
+            <p class="answer"><b>Arguably PixelMint.</b> In India the person who causes a computer-generated work is its author (s.2(d)(vi)), subject to the AI tool's terms. In the US only human-authored elements would be protected.</p>
+          </div>
+          <div class="poll">
+            <h4>3. Can Riya keep using the AVA character?</h4>
+            <div class="opts"><button type="button" class="opt wrong" aria-pressed="false">Yes, including the name</button><button type="button" class="opt right" aria-pressed="false">Her design, but not the name “AVA”</button><button type="button" class="opt wrong" aria-pressed="false">No, nothing at all</button></div>
+            <p class="answer"><b>Her design, not the name.</b> PixelMint owns the registered mark for similar goods and services. The likely outcome is a negotiated buy-out of Riya's copyright.</p>
+          </div>
+          <div class="poll">
+            <h4>4. Does Threadline keep rights after the campaign?</h4>
+            <div class="opts"><button type="button" class="opt wrong" aria-pressed="false">Yes, permanently</button><button type="button" class="opt right" aria-pressed="false">Only what the licence grants</button><button type="button" class="opt wrong" aria-pressed="false">Yes, because it paid for the content</button></div>
+            <p class="answer"><b>Only the licence.</b> Threadline's rights end with the six-month term unless the contract says otherwise.</p>
+          </div>
+          <div class="poll">
+            <h4>5. What should PixelMint have done?</h4>
+            <div class="opts"><button type="button" class="opt right" aria-pressed="false">Get a signed assignment covering future variations</button><button type="button" class="opt wrong" aria-pressed="false">Pay Riya a higher fee</button><button type="button" class="opt wrong" aria-pressed="false">Nothing, payment was enough</button></div>
+            <p class="answer"><b>A signed assignment.</b> It should also have added an AI-output clause and an exit clause. Filing the trademark early was the one thing it got right.</p>
+          </div>
+          <div><button type="button" class="btn btn-ink" id="reveal-all">Reveal all answers</button></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="act" aria-labelledby="a2-h">
+      <div class="act-title"><h3 id="a2-h">The AI influencer legal challenge</h3><span>Activity 2, six-question quiz</span></div>
+      <div class="quiz">
+        <div class="qcard" id="qcard" aria-live="polite"></div>
+        <aside class="score" id="score"></aside>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- References -->
+<section class="refs" id="references" aria-labelledby="refs-h">
+  <div class="wrap">
+    <h2 id="refs-h">References</h2>
+    <p class="intro">APA 7th edition. All sources accessed November 2026. Every graphic on this site is drawn in code; no third-party images are used.</p>
+    <div class="refgrid">
+      <section>
+        <h3>Legal authorities</h3>
+        <ul>
+          <li><i>Anil Kapoor v. Simply Life India &amp; Ors.</i>, CS(COMM) 652/2023 (Delhi High Court, Sept. 20, 2023; decree Apr. 30, 2024). <a href="https://indiankanoon.org/doc/113724486/">https://indiankanoon.org/doc/113724486/</a></li>
+          <li><i>Arijit Singh v. Codible Ventures LLP &amp; Ors.</i>, Interim Application (L) No. 23560 of 2024 (Bombay High Court, July 26, 2024). <a href="https://livelaw.in/pdf_upload/arijit-singh-vs-codible-ventures-llp-552701.pdf">https://livelaw.in/pdf_upload/arijit-singh-vs-codible-ventures-llp-552701.pdf</a></li>
+          <li><i>Aishwarya Rai Bachchan v. [unnamed defendants]</i>, CS(COMM) 956/2025 (Delhi High Court, Sept. 2025).</li>
+          <li>Consumer Protection Act, 2019, No. 35, Acts of Parliament, 2019 (India).</li>
+          <li>Copyright Act, 1957, No. 14, Acts of Parliament, 1957 (India). <a href="https://copyright.gov.in/Copyright_Act_1957/chapter_i.html">https://copyright.gov.in/Copyright_Act_1957/chapter_i.html</a></li>
+          <li>Copyright Office, Government of India. (2026, August 31). <i>Order in Application No. 9356/2022-CO/A (Stephen L. Thaler, DABUS)</i>.</li>
+          <li>Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Amendment Rules, 2026, G.S.R. 120(E) (India).</li>
+          <li><i>Jaikishan Kakubhai Saraf alias Jackie Shroff v. The Peppy Store &amp; Ors.</i>, CS(COMM) 389/2024 (Delhi High Court, May 15, 2024). <a href="https://future.indiankanoon.org/doc/165756699/">https://future.indiankanoon.org/doc/165756699/</a></li>
+          <li><i>Li v. Liu</i>, (2023) Jing 0491 Min Chu No. 11279 (Beijing Internet Court, Nov. 27, 2023).</li>
+          <li>NO FAKES Act of 2026, S. 4591, 119th Cong. (2026). <a href="https://www.govinfo.gov/content/pkg/BILLS-119s4591is/xhtml/BILLS-119s4591is.html">https://www.govinfo.gov/content/pkg/BILLS-119s4591is/xhtml/BILLS-119s4591is.html</a></li>
+          <li>Regulation (EU) 2024/1689 of the European Parliament and of the Council (Artificial Intelligence Act), art. 50.</li>
+          <li><i>Thaler v. Perlmutter</i>, 130 F.4th 1039 (D.C. Cir. 2025), <i>cert. denied</i>, No. 25-449 (U.S. Mar. 2, 2026).</li>
+          <li>Trade Marks Act, 1999, No. 47, Acts of Parliament, 1999 (India).</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Government, regulator and international sources</h3>
+        <ul>
+          <li>Advertising Standards Council of India. (2023). <i>Guidelines for influencer advertising in digital media</i>. <a href="https://www.ascionline.in/wp-content/uploads/2023/08/GUIDELINES-FOR-INFLUENCER-ADVERTISING-IN-DIGITAL-MEDIA.pdf">https://www.ascionline.in/wp-content/uploads/2023/08/GUIDELINES-FOR-INFLUENCER-ADVERTISING-IN-DIGITAL-MEDIA.pdf</a></li>
+          <li>Department for Promotion of Industry and Internal Trade. (2025, December). <i>Working paper on generative AI and copyright, Part 1</i>.</li>
+          <li>Department of Consumer Affairs. (2023, January 20). <i>Centre releases endorsement guidelines for celebs and social media influencers</i> [Press release]. Press Information Bureau. <a href="https://consumeraffairs.nic.in/sites/default/files/PIB1892527.pdf">https://consumeraffairs.nic.in/sites/default/files/PIB1892527.pdf</a></li>
+          <li>European Parliamentary Research Service. (2026, January). <i>[Briefing on Denmark's proposed copyright rules on deepfakes]</i> (EPRS_ATA(2026)782611). <a href="https://eprs.europarl.europa.eu/contents/publications/EPRS/2026/01/EPRS_ATA(2026)782611.html">https://eprs.europarl.europa.eu/contents/publications/EPRS/2026/01/EPRS_ATA(2026)782611.html</a></li>
+          <li>Federal Trade Commission. (2023, July 26). Guides concerning the use of endorsements and testimonials in advertising. <i>Federal Register, 88</i>(142), 48092–48112.</li>
+          <li>United Nations. (n.d.). <i>Goals 8, 9, 12 and 16</i>. <a href="https://sdgs.un.org/goals">https://sdgs.un.org/goals</a></li>
+          <li>U.S. Copyright Office. (2025, January 29). <i>Copyright and artificial intelligence, Part 2: Copyrightability</i>. <a href="https://www.copyright.gov/ai/">https://www.copyright.gov/ai/</a></li>
+          <li>World Intellectual Property Organization. (2022). <i>Digital influencers herald a new era of branding</i>. <a href="https://www.wipo.int/academy/en/news/2022/news_0002.html">https://www.wipo.int/academy/en/news/2022/news_0002.html</a></li>
+          <li>World Intellectual Property Organization. (n.d.). <i>AI voice cloning: How a Bollywood veteran set a legal precedent</i>. WIPO Magazine.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Law firm analyses and legal commentary</h3>
+        <ul>
+          <li>Herbert Smith Freehills Kramer. (2026, March). <i>UK government report on copyright and AI concludes more evidence is needed, although s9(3) CDPA could go</i>.</li>
+          <li>Holland &amp; Knight. (2026, March 3). <i>The final word? Supreme Court refuses to hear case on AI authorship and inventorship</i>.</li>
+          <li>Kalra, E. (2026, October 1). <i>Character merchandising and licensing in India</i>. King Stubb &amp; Kasiva.</li>
+          <li>Kirkland &amp; Ellis. (2023, July). <i>Federal Trade Commission releases first updates to Endorsement Guides in 14 years</i>.</li>
+          <li>Kluwer Copyright Blog. (2023). <i>Beijing Internet Court grants copyright to AI-generated image for the first time</i>.</li>
+          <li>Manatt. (2026, May). <i>Congress reintroduces the NO FAKES Act: What's new in the 2026 bill</i>.</li>
+          <li>Mayer Brown. (2025, March 20). <i>Appellate court confirms copyright statute limits authorship to humans</i>.</li>
+          <li>Ropes &amp; Gray. (2026, August). <i>You talkin' to me? Operationalising the EU AI Act's transparency obligations</i>.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>News, industry and research sources</h3>
+        <ul>
+          <li>Bloomberg. (2020, September 3). <i>Virtual star of Porsche ads gets real venture backing</i>.</li>
+          <li>Boccacino, J. (2025, November 25). <i>How much do we trust virtual influencers?</i> Syracuse University News.</li>
+          <li>Business Standard. (2026, September 1). <i>Copyright Office rejects AI system DABUS as author under Indian law</i>.</li>
+          <li>Business Today. (2026, February 10). <i>Govt tightens rules on AI-generated content, mandates labels and faster takedowns</i>.</li>
+          <li>Digiday. (2025). <i>In graphic detail: Virtual influencers click with young audiences, yet brands' interest wanes</i>.</li>
+          <li>Fashion Network. (2019, May 23). <i>Calvin Klein issues apology after new ad sparks queerbaiting accusations</i>.</li>
+          <li>Market Research Future; Roots Analysis; SNS Insider; Straits Research; The Business Research Company. (2025). <i>Virtual influencer market reports</i>.</li>
+          <li>Min, R. (2026, October 8). <i>Denmark introduces bill to protect people's faces and voices from deepfakes</i>. Euronews.</li>
+          <li>Small, J. (2023, November 28). <i>This AI fitness influencer makes $11,000 a month and was asked out by a celebrity</i>. Entrepreneur.</li>
+          <li>TechCrunch. (2021, October 4). <i>NFT startup Dapper Labs acquires virtual influencer startup Brud</i>.</li>
+          <li>Thapliyal, N. (2023, September 20). <i>Delhi High Court protects actor Anil Kapoor's personality rights</i>. LiveLaw.</li>
+          <li>TIME Staff. (2018, June 28). <i>The 25 most influential people on the internet</i>. TIME.</li>
+          <li>Variety. (2025). <i>AI actress Tilly Norwood condemned by SAG-AFTRA</i>.</li>
+          <li>YouGov. (2020). <i>[Survey: about 40% of Gen Z and millennials cannot tell CGI influencers from humans]</i>.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="wordmark" href="#top">Persona<i>&amp;</i>Property</a>
+      <p>A research study on AI virtual influencers and intellectual property law. Prepared for an academic course; not legal advice.</p>
+    </div>
+    <div><h4>Course</h4><ul><li>MGT402M26</li><li>Prof. Vinita Krishna</li><li>Shiv Nadar University</li></ul></div>
+    <div><h4>Team</h4><ul><li class="fill">Add member names here</li></ul></div>
+    <div><h4>Also in this project</h4><ul><li><a href="#activities">Activities and quiz</a></li><li class="fill">Flipbook report: add link</li><li class="fill">Instagram page: add link</li><li><a href="#references">References</a></li></ul></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Hero: rights tokens (©, ™, §, ®, voice, signature) ---------- */
+  var cv = document.getElementById("tokens");
+  var ctx = cv.getContext("2d");
+  var hero = document.getElementById("top");
+  var discs = [
+    {x:.60,y:.21,r:.15,tilt:-.38,ph:.5,sp:.30,mark:"©"},
+    {x:.77,y:.35,r:.115,tilt:.32,ph:2.3,sp:-.24,mark:"™"},
+    {x:.44,y:.14,r:.075,tilt:-.62,ph:1.1,sp:.21,mark:"§"},
+    {x:.91,y:.22,r:.07,tilt:.5,ph:3.6,sp:.27,mark:"®"},
+    {x:.62,y:.71,r:.07,tilt:-.2,ph:4.4,sp:-.19,mark:"wave"},
+    {x:.31,y:.12,r:.055,tilt:.4,ph:5.2,sp:.35,mark:"sig"}
+  ].sort(function(a,b){return a.r-b.r;});
+  var W=0,H=0,dpr=1,running=false,t0=performance.now(),raf=0;
+
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function drawMark(m,R){
+    ctx.fillStyle="#fff";ctx.strokeStyle="#fff";ctx.lineCap="round";ctx.lineJoin="round";
+    if(m==="wave"){
+      ctx.lineWidth=R*.07;ctx.beginPath();
+      for(var i=0;i<=48;i++){var xx=-R*.5+i*(R/48),amp=Math.sin(i/48*Math.PI)*R*.3,yy=Math.sin(i*.8)*amp;if(i)ctx.lineTo(xx,yy);else ctx.moveTo(xx,yy);}
+      ctx.stroke();return;
+    }
+    if(m==="sig"){
+      ctx.lineWidth=R*.06;ctx.beginPath();ctx.moveTo(-R*.45,R*.08);
+      ctx.bezierCurveTo(-R*.3,-R*.42,-R*.1,R*.35,0,-R*.05);
+      ctx.bezierCurveTo(R*.1,-R*.36,R*.25,R*.28,R*.45,-R*.12);ctx.stroke();
+      ctx.lineWidth=R*.03;ctx.beginPath();ctx.moveTo(-R*.42,R*.32);ctx.lineTo(R*.42,R*.32);ctx.stroke();return;
+    }
+    ctx.font="600 "+(R*1.0)+"px \"Schibsted Grotesk\", Arial, sans-serif";
+    ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(m,0,R*.05);
+  }
+  function drawDisc(d,t){
+    var narrow=W<900;
+    var base=Math.min(W*.62,H*1.05);
+    var R=d.r*base*(narrow?1.2:1);
+    var x=(narrow?.6+(d.x-.55)*1.15:d.x)*W;
+    var y=(narrow?.11+d.y*.28:d.y)*H+Math.sin(t*.55+d.ph)*R*.07;
+    var phi=d.ph+t*d.sp,c=Math.cos(phi),s=Math.sin(phi);
+    var sx=Math.max(Math.abs(c),.035),th=R*.075;
+    ctx.save();ctx.translate(x,y);ctx.rotate(d.tilt);
+    ctx.beginPath();ctx.ellipse(th*s,0,R*sx,R,0,0,Math.PI*2);ctx.fillStyle="rgba(176,40,58,.88)";ctx.fill();
+    ctx.shadowColor="rgba(130,15,40,.28)";ctx.shadowBlur=R*.45;ctx.shadowOffsetY=R*.22;
+    var g=ctx.createLinearGradient(-R*sx,-R,R*sx,R);
+    if(c>=0){g.addColorStop(0,"rgba(255,224,208,.97)");g.addColorStop(.45,"rgba(244,124,106,.96)");g.addColorStop(1,"rgba(212,58,92,.96)");}
+    else{g.addColorStop(0,"rgba(250,192,172,.96)");g.addColorStop(1,"rgba(224,82,98,.96)");}
+    ctx.beginPath();ctx.ellipse(0,0,R*sx,R,0,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+    ctx.shadowColor="transparent";ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+    var hg=ctx.createRadialGradient(-R*sx*.35,-R*.45,0,-R*sx*.35,-R*.45,R*.95);
+    hg.addColorStop(0,"rgba(255,255,255,.45)");hg.addColorStop(1,"rgba(255,255,255,0)");
+    ctx.beginPath();ctx.ellipse(0,0,R*sx,R,0,0,Math.PI*2);ctx.fillStyle=hg;ctx.fill();
+    ctx.lineWidth=Math.max(1,R*.022);ctx.strokeStyle="rgba(255,255,255,.78)";
+    ctx.beginPath();ctx.ellipse(0,0,R*sx*.97,R*.97,0,Math.PI*.95,Math.PI*1.9);ctx.stroke();
+    ctx.lineWidth=Math.max(1,R*.012);ctx.strokeStyle="rgba(255,255,255,.34)";
+    ctx.beginPath();ctx.ellipse(0,0,R*sx*.8,R*.8,0,0,Math.PI*2);ctx.stroke();
+    if(c>.18){ctx.save();ctx.globalAlpha=Math.min(1,(c-.18)/.5)*.95;ctx.scale(sx,1);drawMark(d.mark,R);ctx.restore();}
+    ctx.restore();
+  }
+  function paint(t){ctx.clearRect(0,0,W,H);for(var i=0;i<discs.length;i++)drawDisc(discs[i],t);}
+  function frame(now){paint((now-t0)/1000);if(running)raf=requestAnimationFrame(frame);}
+  function start(){if(reduce){paint(0);return;}if(!running){running=true;raf=requestAnimationFrame(frame);}}
+  function stop(){running=false;cancelAnimationFrame(raf);}
+  function initTokens(){
+    resize();paint(0);
+    if("IntersectionObserver" in window){
+      new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)start();else stop();});}).observe(hero);
+    } else start();
+    window.addEventListener("resize",function(){resize();if(!running)paint(0);});
+  }
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(initTokens);}else{initTokens();}
+
+  /* ---------- Progress bar + chapter pill ---------- */
+  var navMap={study:["study","s1","s2","s3"],law:["law","s5","s6","s7","s8"],cases:["s9","cases","s11"],business:["business"],sdgs:["sdgs"],forward:["s14","s15"],activities:["activities","references"]};
+  var order=[];Object.keys(navMap).forEach(function(k){navMap[k].forEach(function(id){var el=document.getElementById(id);if(el)order.push({el:el,key:k});});});
+  order.sort(function(a,b){return a.el.offsetTop-b.el.offsetTop;});
+  var links=document.querySelectorAll(".pill a[data-nav]");
+  var bar=document.getElementById("progress");
+  var ticking=false;
+  function onScroll(){
+    var max=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(max>0?Math.min(100,window.scrollY/max*100):0)+"%";
+    var cur=null,line=window.innerHeight*.35;
+    for(var i=0;i<order.length;i++){if(order[i].el.getBoundingClientRect().top<=line)cur=order[i].key;}
+    links.forEach(function(a){var on=a.getAttribute("data-nav")===cur;a.classList.toggle("on",on);if(on)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current");});
+    ticking=false;
+  }
+  window.addEventListener("scroll",function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll);}},{passive:true});
+  onScroll();
+
+  /* ---------- Market chart (USD bn, 0 to 15 scale) ---------- */
+  var mk=[
+    ["Market Research Future",12.84,"308.33 bn by 2035","37.4%","https://www.marketresearchfuture.com/reports/virtual-influencer-market"],
+    ["Roots Analysis",11.46,"298 bn by 2035","38.5%","https://www.rootsanalysis.com/virtual-influencer-market"],
+    ["The Business Research Co.",11.26,"62.67 bn by 2030","40.9%","https://www.researchandmarkets.com/reports/6217955/virtual-influencers-market-report"],
+    ["SNS Insider",9.75,"154.83 bn by 2033","41.3%","https://www.snsinsider.com/reports/virtual-influencer-market-5924"],
+    ["Straits Research",8.30,"111.78 bn by 2033","38.4%","https://rss.globenewswire.com/news-release/2025/02/20/3029529/0/en/Virtual-Influencer-Market-Size-is-Projected-to-Reach-USD-111-78-Billion-by-2033-Growing-at-a-CAGR-of-38-4-Straits-Research.html"]
+  ];
+  var bars=document.getElementById("market-bars");
+  mk.forEach(function(r){
+    var row=document.createElement("div");row.className="bar-row";
+    var who=document.createElement("span");who.className="who";
+    var a=document.createElement("a");a.href=r[4];a.textContent=r[0];who.appendChild(a);
+    var tr=document.createElement("div");tr.className="bar-track";
+    var b=document.createElement("div");b.className="bar num";b.style.width=(r[1]/15*100)+"%";b.textContent=r[1].toFixed(2);
+    b.setAttribute("aria-label",r[0]+": USD "+r[1].toFixed(2)+" billion in 2025");
+    tr.appendChild(b);
+    var fc=document.createElement("span");fc.className="fc num";fc.innerHTML=r[2]+"<br>"+r[3]+" a year";
+    row.appendChild(who);row.appendChild(tr);row.appendChild(fc);bars.appendChild(row);
+  });
+
+  /* ---------- AVA explorer ---------- */
+  var assets=[
+    {label:"Character design",title:"Original character design",prot:"Copyright, as an artistic work",owner:"The human designer, or the employer if it was made in the course of employment",risk:"A freelancer keeps copyright unless she signs a written assignment (s.17, s.19)."},
+    {label:"3D model files",title:"3D model files, code and rigs",prot:"Copyright, as a computer program or artistic work",owner:"The developer, or the employer",risk:"Files held on a contractor's machine can leave with the contractor."},
+    {label:"AI-generated posts",title:"Each AI-generated post",prot:"Copyright only with enough human authorship",owner:"India: the person who causes it. US: possibly no one",risk:"A purely prompted post may be free for anyone to copy in the US."},
+    {label:"Name and logo",title:"Name, logo and catchphrase",prot:"Trademark; passing off",owner:"Whoever registers it, or first uses it in trade",risk:"If a designer files first, the agency must buy back its own persona's name."},
+    {label:"Backstory and captions",title:"Personality, backstory and captions",prot:"Copyright in text; character merchandising",owner:"The writer, or the employer",risk:"Storylines written by fans or freelancers need their own licences."},
+    {label:"Synthetic voice",title:"Synthetic voice",prot:"Copyright in recordings; personality rights of anyone cloned",owner:"The voice designer, or the real person if a voice is imitated",risk:"A voice that evokes a celebrity invites an injunction, as in Arijit Singh (2024)."},
+    {label:"Account and followers",title:"Account, followers and data",prot:"Platform terms of service; contract",owner:"The account holder, subject to platform terms",risk:"Whoever holds the login can walk away with the audience."},
+    {label:"Goodwill",title:"Goodwill and reputation",prot:"Passing off; trademark",owner:"The business trading under the persona",risk:"Goodwill built under an unregistered name is harder to defend."}
+  ];
+  var ring=document.getElementById("ring"),det=document.getElementById("asset-detail"),nodes=[];
+  function showAsset(i){
+    nodes.forEach(function(n,j){n.setAttribute("aria-pressed",j===i?"true":"false");});
+    var a=assets[i];
+    det.innerHTML="";
+    var k=document.createElement("span");k.className="d-k";k.textContent="Part "+(i+1)+" of "+assets.length+" in the persona";
+    var h=document.createElement("h4");h.textContent=a.title;
+    var dl=document.createElement("dl");
+    [["Protected by",a.prot],["Default owner, with no contract",a.owner]].forEach(function(p){var w=document.createElement("div");var dt=document.createElement("dt");dt.textContent=p[0];var dd=document.createElement("dd");dd.textContent=p[1];w.appendChild(dt);w.appendChild(dd);dl.appendChild(w);});
+    var r=document.createElement("p");r.className="risk";r.textContent="Risk: "+a.risk;
+    det.appendChild(k);det.appendChild(h);det.appendChild(dl);det.appendChild(r);
+  }
+  assets.forEach(function(a,i){
+    var ang=-Math.PI/2+i*(Math.PI*2/assets.length);
+    var b=document.createElement("button");b.type="button";b.className="node";b.textContent=a.label;
+    b.style.left=(50+38*Math.cos(ang))+"%";b.style.top=(50+38*Math.sin(ang))+"%";
+    b.addEventListener("click",function(){showAsset(i);});
+    ring.appendChild(b);nodes.push(b);
+  });
+  showAsset(0);
+
+  /* ---------- Tabs ---------- */
+  document.querySelectorAll("[data-tabs]").forEach(function(box){
+    var tabs=[].slice.call(box.querySelectorAll('[role="tab"]'));
+    function sel(i,focus){
+      tabs.forEach(function(t,j){var on=j===i;t.setAttribute("aria-selected",on?"true":"false");t.tabIndex=on?0:-1;document.getElementById(t.getAttribute("aria-controls")).hidden=!on;});
+      if(focus)tabs[i].focus();
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener("click",function(){sel(i,false);});
+      t.addEventListener("keydown",function(e){
+        if(e.key==="ArrowRight"){e.preventDefault();sel((i+1)%tabs.length,true);}
+        else if(e.key==="ArrowLeft"){e.preventDefault();sel((i-1+tabs.length)%tabs.length,true);}
+        else if(e.key==="Home"){e.preventDefault();sel(0,true);}
+        else if(e.key==="End"){e.preventDefault();sel(tabs.length-1,true);}
+      });
+    });
+  });
+
+  /* ---------- Case-law scroller ---------- */
+  var track=document.getElementById("cases-track");
+  document.querySelectorAll("[data-scroll]").forEach(function(b){
+    b.addEventListener("click",function(){track.scrollBy({left:Number(b.getAttribute("data-scroll"))*track.clientWidth*.8,behavior:reduce?"auto":"smooth"});});
+  });
+
+  /* ---------- Activity 1: polls ---------- */
+  document.querySelectorAll("#polls .poll").forEach(function(p){
+    var opts=p.querySelectorAll(".opt");
+    opts.forEach(function(o){o.addEventListener("click",function(){opts.forEach(function(x){x.setAttribute("aria-pressed",x===o?"true":"false");});p.classList.add("revealed");});});
+  });
+  document.getElementById("reveal-all").addEventListener("click",function(){document.querySelectorAll("#polls .poll").forEach(function(p){p.classList.add("revealed");});});
+
+  /* ---------- Activity 2: quiz ---------- */
+  var Q=[
+    {topic:"Voice cloning",q:"An AI influencer promotes a product using a cloned voice of a famous Indian singer, without permission. What is the main legal issue?",o:["Copyright in the singer's songs","Violation of the singer's personality rights","Trademark infringement","No issue, because the voice is AI-generated"],a:1,e:"In Arijit Singh v. Codible Ventures (Bombay High Court, 2024), cloning a celebrity's voice without consent was held to violate personality rights."},
+    {topic:"Look-alike persona",q:"A start-up launches “Lil Miquella”, a look-alike virtual influencer, to promote clothing in the US. Which right is most directly infringed?",o:["Miquela's personality rights","The registered trademark MIQUELA","A design patent","None, because Miquela is fictional"],a:1,e:"A fictional persona has no personality rights, but its owner's registered mark protects the name for clothing and advertising."},
+    {topic:"Disclosure in India",q:"A brand posts AVA endorsing a skincare cream in India, tagged only #ad. What else is required?",o:["Nothing more","An upfront, prominent disclosure that AVA is not a real human","Government approval","The designer's signature"],a:1,e:"ASCI clause 1.4 requires virtual influencers to disclose that they are not real; the IT Rules 2026 also require labels on realistic synthetic content."},
+    {topic:"US authorship",q:"An agency types only text prompts into an AI tool to make AVA's posts. Are the posts protected by copyright in the US?",o:["Yes, the prompt-writer is the author","Yes, the AI company is the author","No, prompts alone are not enough human authorship","Yes, once they are registered"],a:2,e:"The US Copyright Office (2025) and Thaler v. Perlmutter require human authorship; the Supreme Court declined review in March 2026."},
+    {topic:"The DABUS order",q:"What did India's Registrar of Copyrights decide about the AI system DABUS in August 2026?",o:["DABUS can be an author","DABUS cannot be an author; the human who caused the work can be","AI-generated works can never be original","The work falls into the public domain"],a:1,e:"The order of 31 August 2026 applied s.2(d)(vi) and also held the work original."},
+    {topic:"Misleading endorsement",q:"AVA promotes a fake weight-loss product in India. Whom can the CCPA penalise?",o:["Only AVA","No one, because AVA is not a person","The advertiser and the endorsers responsible","Only the AI platform"],a:2,e:"The Consumer Protection Act 2019 and the 2023 Endorsement Know-hows cover virtual influencers: penalties up to ₹10 lakh, or ₹50 lakh for repeat offences."}
+  ];
+  var qi=0,res=[];
+  var qcard=document.getElementById("qcard"),score=document.getElementById("score");
+  function el(tag,cls,txt){var n=document.createElement(tag);if(cls)n.className=cls;if(txt!=null)n.textContent=txt;return n;}
+  function renderScore(){
+    score.innerHTML="";
+    var right=res.filter(function(r){return r===true;}).length;
+    var s=el("div","s num");s.textContent=right;var sm=el("small",null," / "+Q.length);s.appendChild(sm);
+    score.appendChild(el("h4",null,"Score"));score.appendChild(s);
+    score.appendChild(el("p",null,res.length<Q.length?"Answer each question to see how the law applies.":(right>=5?"Ready to advise a brand.":right>=3?"Solid. Review the chapters you missed.":"Worth another read of §4 to §7.")));
+    var ul=el("ul");
+    Q.forEach(function(q,i){ul.appendChild(el("li",null,q.topic+": "+(res[i]===undefined?"not answered yet":res[i]?"correct":"missed")));});
+    score.appendChild(ul);
+  }
+  function renderQ(){
+    qcard.innerHTML="";
+    if(qi>=Q.length){
+      var right=res.filter(function(r){return r;}).length;
+      qcard.appendChild(el("div","qmeta","Quiz complete"));
+      qcard.appendChild(el("h4",null,"You answered "+right+" of "+Q.length+" correctly."));
+      qcard.appendChild(el("p","qexp","Every answer is drawn from this study: personality rights (§6), trademark (§5), advertising rules (§7) and copyright (§4)."));
+      var nav=el("div","qnav");var again=el("button","btn btn-ink","Restart the quiz");again.type="button";
+      again.addEventListener("click",function(){qi=0;res=[];renderQ();renderScore();});nav.appendChild(again);qcard.appendChild(nav);again.focus();return;
+    }
+    var q=Q[qi];
+    var meta=el("div","qmeta");meta.appendChild(el("span",null,"Question "+(qi+1)+" of "+Q.length));
+    var dots=el("div","qdots");dots.setAttribute("aria-hidden","true");
+    Q.forEach(function(_,i){dots.appendChild(el("i",i<qi?"done":i===qi?"now":""));});
+    meta.appendChild(dots);qcard.appendChild(meta);
+    qcard.appendChild(el("h4",null,q.q));
+    var box=el("div","qopts"),btns=[];
+    q.o.forEach(function(t,i){
+      var b=el("button","qopt");b.type="button";
+      b.appendChild(el("span","l","ABCD"[i]));b.appendChild(el("span",null,t));
+      b.addEventListener("click",function(){
+        res[qi]=(i===q.a);
+        btns.forEach(function(x,j){x.disabled=true;if(j===q.a)x.classList.add("right");else if(j===i)x.classList.add("wrong");});
+        var ex=el("p","qexp");ex.appendChild(el("b",null,i===q.a?"Correct. ":"Not quite. "));ex.appendChild(document.createTextNode(q.e));
+        qcard.appendChild(ex);
+        var nav=el("div","qnav");var nx=el("button","btn btn-ink",qi===Q.length-1?"See my result":"Next question");nx.type="button";
+        nx.addEventListener("click",function(){qi++;renderQ();});nav.appendChild(nx);qcard.appendChild(nav);
+        renderScore();nx.focus();
+      });
+      btns.push(b);box.appendChild(b);
+    });
+    qcard.appendChild(box);
+  }
+  renderQ();renderScore();
+})();
+</script>
+</body>
+</html>
