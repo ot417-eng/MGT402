@@ -90,6 +90,19 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
 .hero-foot b{font-weight:700;font-size:17px;margin-right:6px}
 .hero-foot span{opacity:.95}
 
+.hero-links{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--display);font-size:15px;font-weight:600}
+.hero-links a{color:#fff;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.hero-links a:hover{text-decoration-thickness:2.5px}
+/* team */
+.team{background:#fff;border-bottom:1px solid var(--line)}
+.team .wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;padding-block:24px}
+.team h2{font-size:14px;font-weight:600;color:var(--ink-faint);letter-spacing:0;margin:0}
+.team-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px 20px}
+.team-list li{display:grid;gap:2px;align-content:start;padding-left:12px;border-left:3px solid var(--coral)}
+.tm-name{font-family:var(--display);font-weight:650;font-size:16px;line-height:1.25;color:var(--ink)}
+.tm-roll{font-family:var(--display);font-size:13.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+@media (max-width:1100px){.team-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:720px){.team .wrap{grid-template-columns:1fr;gap:14px}.team-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* instruments strip */
 .strip{border-bottom:1px solid var(--line);background:var(--paper)}
 .strip .wrap{display:flex;align-items:center;gap:28px;padding-block:22px;overflow-x:auto;scrollbar-width:thin}
@@ -583,6 +596,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
 .foot a{text-decoration:none}
 .foot a:hover{color:var(--peach)}
 .foot .fill{color:var(--peach)}
+.foot .roll{color:#bfa9b4;font-variant-numeric:tabular-nums}
 
 @media (max-width:1000px){
   .matrix-wrap,.ripple-wrap,.scenario,.quiz,.act-head{grid-template-columns:1fr}
@@ -629,6 +643,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
         <a class="btn btn-white" href="#study">Read the study</a>
         <a class="btn btn-line" href="#activities">Run the activities</a>
       </div>
+      <div class="hero-links"><a href="https://online.fliphtml5.com/MGT402/Who_Owns_a_Digital_Persona_Report/" target="_blank" rel="noopener">Read the flipbook report</a><a href="https://www.instagram.com/behind.the.persona_/" target="_blank" rel="noopener">Instagram: @behind.the.persona_</a></div>
     </div>
   </div>
   <div class="hero-foot">
@@ -636,7 +651,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
     <span><b class="num">5</b>jurisdictions compared</span>
     <span><b class="num">2</b>case studies</span>
     <span><b class="num">4</b>SDGs analysed</span>
-    <span><b class="num">54</b>listed sources</span>
+    <span><b class="num">45</b>listed sources</span>
   </div>
 </header>
 
@@ -655,6 +670,20 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
     </ul>
   </div>
 </div>
+
+<section class="team" aria-labelledby="team-h">
+  <div class="wrap">
+    <h2 id="team-h">Prepared by</h2>
+    <ul class="team-list">
+      <li><span class="tm-name">Kaustubh Kannan</span><span class="tm-roll">2410110560</span></li>
+      <li><span class="tm-name">Maahi Chaudhry</span><span class="tm-roll">2510110729</span></li>
+      <li><span class="tm-name">Mohd. Ayaan Siddiqui</span><span class="tm-roll">2510110747</span></li>
+      <li><span class="tm-name">Ojasw Tiwari</span><span class="tm-roll">2310110214</span></li>
+      <li><span class="tm-name">Samiksha Bhatia</span><span class="tm-roll">2310110590</span></li>
+      <li><span class="tm-name">Tuhina Sidana</span><span class="tm-roll">2310110332</span></li>
+    </ul>
+  </div>
+</section>
 
 <main>
 <section class="thesis" id="study" aria-labelledby="thesis-h">
@@ -681,13 +710,13 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
       </article>
       <article class="tile wide">
         <div class="big num">USD 8–13 bn</div>
-        <p>Estimated global virtual-influencer market in 2025 across five research firms, growing 37–41% a year. Forecasts differ by almost 2x.</p>
+        <p>Estimated global virtual-influencer market in 2025 across five research firms, growing 37–42% a year. The highest estimate is about 1.5 times the lowest.</p>
         <span class="src">See §2 for each estimate</span>
       </article>
       <article class="tile limeT">
-        <div class="big num">~40%</div>
-        <p>of Gen Z and millennials in a YouGov survey could not tell CGI influencers from real ones.</p>
-        <span class="src"><a href="https://yougov.com/articles/27837-about-40-gen-z-and-millennials-cant-tell-cgi-influ">YouGov, 2020</a></span>
+        <div class="big num">42%</div>
+        <p>of Gen Z and millennials in a Fullscreen study had followed an influencer without realising it was CGI.</p>
+        <span class="src"><a href="https://yougov.com/articles/27837-about-40-gen-z-and-millennials-cant-tell-cgi-influ">Fullscreen, 2019, via YouGov</a></span>
       </article>
       <article class="tile inkT">
         <div class="big num">2021</div>
@@ -835,7 +864,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
     <div class="ch-main">
       <header>
         <h2 id="s2-h">Facts and figures</h2>
-        <p class="lead">Five research firms value the 2025 market between USD 8.3 and 12.8 billion, growing 37–41% a year. Because they disagree by almost 2x, we present the figures as a range.</p>
+        <p class="lead">Five research firms value the 2025 market between USD 8.3 and 12.8 billion, growing 37–42% a year. Because the highest estimate is about 1.5 times the lowest, we present the figures as a range.</p>
       </header>
 
       <figure class="chart" id="market" aria-label="Bar chart of 2025 virtual influencer market estimates by research firm">
@@ -889,7 +918,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
       <div class="block">
         <h3>What consumers think</h3>
         <div class="findings">
-          <div class="finding"><span class="fig num">41% / 23%</span><p>saw human influencers as more authentic, against those who trusted CGI influencers; yet respondents rated CGI influencers more effective at prompting purchases (<a class="cite" href="https://yougov.com/articles/27837-about-40-gen-z-and-millennials-cant-tell-cgi-influ">YouGov, 2020</a>).</p></div>
+          <div class="finding"><span class="fig num">41% / 23%</span><p>saw human influencers as more authentic, against those who trusted CGI influencers; yet respondents rated CGI influencers more effective at prompting purchases (<a class="cite" href="https://yougov.com/articles/27837-about-40-gen-z-and-millennials-cant-tell-cgi-influ">Fullscreen study, reported by YouGov, 2020</a>).</p></div>
           <div class="finding"><span class="fig num">352</span><p>Instagram users in a University of Florida study found virtual influencers less authentic, but competitive for functional products and weaker for symbolic and experiential ones (<a class="cite" href="https://www.jou.ufl.edu/insights/pixels-vs-people-the-battle-for-consumer-trust-in-influencer-marketing/">UF College of Journalism</a>).</p></div>
           <div class="finding"><span class="fig num">76%</span><p>of 4,000 US and UK consumers said they trust virtual influencers for product recommendations in a 2024 survey, while 62% of human creators worried about more competition (<a class="cite" href="https://www.agilitypr.com/?p=99265">Agility PR</a>).</p></div>
           <div class="finding"><span class="fig num">2025</span><p>Syracuse University research found that the more human a virtual influencer looks, the more people trust its message (<a class="cite" href="https://news.syr.edu/2025/11/25/how-much-do-we-trust-virtual-influencers">Syracuse News</a>).</p></div>
@@ -1683,7 +1712,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
           <div class="sdg-top" style="background:#BF8B2E"><span class="n">12</span><div><b>Responsible consumption and production</b><span>Targets 12.6, 12.8</span></div></div>
           <div class="sdg-body">
             <p class="t">Companies adopt sustainable practices and report on them; people everywhere have the information to make informed choices (<a class="cite" href="https://sdgs.un.org/goals/goal12">UN</a>).</p>
-            <div class="pm"><div class="p"><b>Positive ripple</b>ASCI's not-a-real-human rule and IT Rules labels support informed choice.</div><div class="m"><b>Negative ripple</b>About 40% of young consumers cannot tell CGI influencers from real ones; unrealistic beauty standards.</div></div>
+            <div class="pm"><div class="p"><b>Positive ripple</b>ASCI's not-a-real-human rule and IT Rules labels support informed choice.</div><div class="m"><b>Negative ripple</b>42% of young people had followed a CGI influencer without realising; unrealistic beauty standards.</div></div>
             <p class="q">Should AI personas always be disclosed, and is disclosure enough?</p>
           </div>
         </article>
@@ -1774,7 +1803,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
   <div class="wrap">
     <div class="act-head">
       <h2 id="act-h">Your turn to rule</h2>
-      <p>Two activities for the class. Run the live vote on our Instagram story or in Mentimeter, then reveal the model answers here.</p>
+      <p>Two activities for the class. Run the live vote on <a href="https://www.instagram.com/behind.the.persona_/" target="_blank" rel="noopener">our Instagram story</a> or in Mentimeter, then reveal the model answers here.</p>
     </div>
 
     <article class="act" aria-labelledby="a1-h">
@@ -1891,6 +1920,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
           <li>Business Today. (2026, February 10). <i>Govt tightens rules on AI-generated content, mandates labels and faster takedowns</i>.</li>
           <li>Digiday. (2025). <i>In graphic detail: Virtual influencers click with young audiences, yet brands' interest wanes</i>.</li>
           <li>Fashion Network. (2019, May 23). <i>Calvin Klein issues apology after new ad sparks queerbaiting accusations</i>.</li>
+          <li>Fullscreen. (2019). <i>Can CGI influencers have real influence?</i> [TBH community study, N = 534, ages 13–34].</li>
           <li>Market Research Future; Roots Analysis; SNS Insider; Straits Research; The Business Research Company. (2025). <i>Virtual influencer market reports</i>.</li>
           <li>Min, R. (2026, October 8). <i>Denmark introduces bill to protect people's faces and voices from deepfakes</i>. Euronews.</li>
           <li>Small, J. (2023, November 28). <i>This AI fitness influencer makes $11,000 a month and was asked out by a celebrity</i>. Entrepreneur.</li>
@@ -1898,7 +1928,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
           <li>Thapliyal, N. (2023, September 20). <i>Delhi High Court protects actor Anil Kapoor's personality rights</i>. LiveLaw.</li>
           <li>TIME Staff. (2018, June 28). <i>The 25 most influential people on the internet</i>. TIME.</li>
           <li>Variety. (2025). <i>AI actress Tilly Norwood condemned by SAG-AFTRA</i>.</li>
-          <li>YouGov. (2020). <i>[Survey: about 40% of Gen Z and millennials cannot tell CGI influencers from humans]</i>.</li>
+          <li>YouGov. (2020, February 11). <i>About 40% of Gen Z and millennials can’t tell CGI influencers from real ones</i> [Summary of Fullscreen research]. <a href="https://yougov.com/articles/27837-about-40-gen-z-and-millennials-cant-tell-cgi-influ">https://yougov.com/articles/27837</a></li>
         </ul>
       </section>
     </div>
@@ -1912,8 +1942,8 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
       <p>A research study on AI virtual influencers and intellectual property law. Prepared for an academic course; not legal advice.</p>
     </div>
     <div><h4>Course</h4><ul><li>MGT402M26</li><li>Prof. Vinita Krishna</li><li>Shiv Nadar University</li></ul></div>
-    <div><h4>Team</h4><ul><li class="fill">Add member names here</li></ul></div>
-    <div><h4>Also in this project</h4><ul><li><a href="#activities">Activities and quiz</a></li><li class="fill">Flipbook report: add link</li><li class="fill">Instagram page: add link</li><li><a href="#references">References</a></li></ul></div>
+    <div><h4>Team</h4><ul><li>Kaustubh Kannan <span class="roll">(2410110560)</span></li><li>Maahi Chaudhry <span class="roll">(2510110729)</span></li><li>Mohd. Ayaan Siddiqui <span class="roll">(2510110747)</span></li><li>Ojasw Tiwari <span class="roll">(2310110214)</span></li><li>Samiksha Bhatia <span class="roll">(2310110590)</span></li><li>Tuhina Sidana <span class="roll">(2310110332)</span></li></ul></div>
+    <div><h4>Also in this project</h4><ul><li><a href="#activities">Activities and quiz</a></li><li><a href="https://online.fliphtml5.com/MGT402/Who_Owns_a_Digital_Persona_Report/" target="_blank" rel="noopener">Flipbook report</a></li><li><a href="https://www.instagram.com/behind.the.persona_/" target="_blank" rel="noopener">Instagram: @behind.the.persona_</a></li><li><a href="#references">References</a></li></ul></div>
   </div>
 </footer>
 
@@ -2019,7 +2049,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;font-weight:60
   var mk=[
     ["Market Research Future",12.84,"308.33 bn by 2035","37.4%","https://www.marketresearchfuture.com/reports/virtual-influencer-market"],
     ["Roots Analysis",11.46,"298 bn by 2035","38.5%","https://www.rootsanalysis.com/virtual-influencer-market"],
-    ["The Business Research Co.",11.26,"62.67 bn by 2030","40.9%","https://www.researchandmarkets.com/reports/6217955/virtual-influencers-market-report"],
+    ["The Business Research Co.",11.26,"45.35 bn by 2029","41.6%","https://www.giiresearch.com/report/tbrc1751169-virtual-influencers-global-market-report.html"],
     ["SNS Insider",9.75,"154.83 bn by 2033","41.3%","https://www.snsinsider.com/reports/virtual-influencer-market-5924"],
     ["Straits Research",8.30,"111.78 bn by 2033","38.4%","https://rss.globenewswire.com/news-release/2025/02/20/3029529/0/en/Virtual-Influencer-Market-Size-is-Projected-to-Reach-USD-111-78-Billion-by-2033-Growing-at-a-CAGR-of-38-4-Straits-Research.html"]
   ];
